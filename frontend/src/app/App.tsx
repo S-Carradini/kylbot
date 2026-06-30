@@ -1,0 +1,57 @@
+import { useState } from "react";
+import { WebpageView } from "./components/WebpageView";
+import { MapView } from "./components/MapView";
+import { BlueChat } from "./components/BlueChat";
+import { ExportModal, ShareModal, TourModal } from "./components/Modals";
+import { LayerKey } from "./components/data";
+
+export default function App() {
+  const [view, setView] = useState<"home" | "map">("home");
+  const [layers, setLayers] = useState<Set<LayerKey>>(new Set(["ama", "cap"]));
+  const [focusPlace, setFocusPlace] = useState<string | undefined>(undefined);
+  const [share, setShare] = useState(false);
+  const [exp, setExp] = useState(false);
+  const [tour, setTour] = useState(false);
+
+  const applyResult = (l: LayerKey[], place?: string) => {
+    const s = new Set(layers);
+    l.forEach((k) => s.add(k));
+    setLayers(s);
+    if (place !== undefined) setFocusPlace(place);
+  };
+
+  return (
+    <div className="size-full">
+      {view === "home" ? (
+        <WebpageView
+          onOpenMap={() => setView("map")}
+          onOpenTour={() => setTour(true)}
+          onApplyResult={applyResult}
+        />
+      ) : (
+        <MapView
+          onBack={() => setView("home")}
+          layers={layers}
+          setLayers={setLayers}
+          focusPlace={focusPlace}
+          setFocusPlace={setFocusPlace}
+          onShare={() => setShare(true)}
+          onExport={() => setExp(true)}
+          onTour={() => setTour(true)}
+        />
+      )}
+
+      {view !== "map" && (
+        <BlueChat
+          onLayersOn={(l) => applyResult(l)}
+          onFocusPlace={setFocusPlace}
+          onOpenMap={() => setView("map")}
+        />
+      )}
+
+      <ShareModal open={share} onClose={() => setShare(false)} />
+      <ExportModal open={exp} onClose={() => setExp(false)} />
+      <TourModal open={tour} onClose={() => setTour(false)} />
+    </div>
+  );
+}
