@@ -10,7 +10,7 @@ own OpenAI API key, its own session cookie, and no shared database.
 ## Project structure
 
 ```
-kyl-water-blueprint/
+kylbot/
 ├── backend/     FastAPI server — chat API, OpenAI integration, resource grounding
 ├── frontend/    React app — the full Arizona Water Blueprint map site with Blue's chat panel
 ├── Dockerfile   Builds both for deployment (e.g. Railway)
