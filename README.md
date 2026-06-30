@@ -27,10 +27,17 @@ kylbot/
 
 In a terminal, from the project root:
 
+Create a file called `.env.local` inside the `frontend/` folder with:
+
+```
+VITE_API_URL=http://localhost:8000
+```
+
+Then install and run:
+
 ```
 cd frontend
 npm install
-copy .env.example .env.local
 npm run dev
 ```
 
@@ -54,8 +61,13 @@ pip install -r requirements.txt
 
 Copy the sample environment file and fill in your own OpenAI key:
 
+**Windows:**
 ```
 copy sample.env .env
+```
+**Mac/Linux:**
+```
+cp sample.env .env
 ```
 
 Note: the `.env` file must live inside the `backend/` folder (not the project root).
