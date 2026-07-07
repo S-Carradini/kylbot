@@ -41,13 +41,15 @@ export default function App() {
         />
       )}
 
-      {view !== "map" && (
+      {/* Kept mounted (just hidden) while on the map screen so the conversation
+          survives going Home instead of resetting — it only clears on Restart. */}
+      <div style={{ display: view === "map" ? "none" : "contents" }}>
         <BlueChat
           onLayersOn={(l) => applyResult(l)}
           onFocusPlace={setFocusPlace}
           onOpenMap={() => setView("map")}
         />
-      )}
+      </div>
 
       <ShareModal open={share} onClose={() => setShare(false)} />
       <ExportModal open={exp} onClose={() => setExp(false)} />
