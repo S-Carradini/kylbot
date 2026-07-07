@@ -3,7 +3,8 @@ import { Send, Home, ChevronRight, ChevronLeft } from "lucide-react";
 import { BlueMascot } from "./BlueMascot";
 import { AgentTrail } from "./AgentTrail";
 import { LayerKey, AgentResponse, answerQuery, EXAMPLE_QUESTIONS } from "./data";
-import arcgisScreenshot from "../../imports/screencapture-experience-arcgis-experience-71bc84edbbf9424f9ceb2116acc6bf5a-2026-06-11-11_55_53.png";
+
+const ARCGIS_MAP_URL = "https://experience.arcgis.com/experience/867a5e5600e64e5f9cee4ec34c88d16c";
 
 type Msg = {
   id: number;
@@ -70,13 +71,14 @@ export function MapView({
   return (
     <div className="h-screen w-screen flex overflow-hidden">
 
-      {/* Map screenshot — grows/shrinks as panel toggles */}
+      {/* Live ArcGIS map — grows/shrinks as panel toggles */}
       <div className="flex-1 min-w-0 relative">
-        <img
-          src={arcgisScreenshot}
-          alt="Arizona Water Blueprint ArcGIS Map"
+        <iframe
+          src={ARCGIS_MAP_URL}
+          title="Arizona Water Blueprint ArcGIS Map"
           className="w-full h-full"
-          style={{ objectFit: "cover", objectPosition: "left top", display: "block", userSelect: "none", pointerEvents: "none" }}
+          style={{ border: "none", display: "block" }}
+          allowFullScreen
         />
 
         {/* Single pill button — right edge, vertically centered */}
