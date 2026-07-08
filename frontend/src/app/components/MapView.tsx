@@ -49,18 +49,44 @@ export function MapView({
     },
   ]);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [visibleWords, setVisibleWords] = useState(0);
+  const [streamId, setStreamId] = useState<number | null>(null);
+  const [pendingId, setPendingId] = useState<number | null>(null);
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: 1e6, behavior: "smooth" });
   }, [msgs]);
 
+  useEffect(() => {
+    // As the word-by-word reveal grows the answer taller, keep following it
+    // downward instead of leaving the panel scrolled where it was.
+    if (streamId === null) return;
+    const container = scrollRef.current;
+    if (!container) return;
+    container.scrollTo({ top: container.scrollHeight, behavior: "smooth" });
+  }, [visibleWords, streamId]);
+
+  useEffect(() => {
+    if (streamId === null) return;
+    const streamingMsg = msgs.find((m) => m.id === streamId);
+    if (!streamingMsg) return;
+    const totalWords = streamingMsg.text.split(/\s+/).filter(Boolean).length;
+    if (visibleWords >= totalWords) {
+      setStreamId(null);
+      return;
+    }
+    const timer = setTimeout(() => setVisibleWords((c) => c + 1), 110);
+    return () => clearTimeout(timer);
+  }, [streamId, visibleWords, msgs]);
+
   const ask = (q: string) => {
     setMsgs((m) => [...m, { id: Date.now(), role: "user", text: q }]);
     const res: AgentResponse = answerQuery(q);
     setTimeout(() => {
+      const replyId = Date.now() + 1;
       setMsgs((m) => [
         ...m,
-        { id: Date.now() + 1, role: "blue", text: res.summary, bullets: res.bullets, trail: res.trail },
+        { id: replyId, role: "blue", text: res.summary, bullets: res.bullets, trail: res.trail },
       ]);
       if (res.layersOn) {
         const s = new Set(layers);
@@ -68,6 +94,15 @@ export function MapView({
         setLayers(s);
       }
       if (res.focusPlace !== undefined) setFocusPlace(res.focusPlace);
+
+      setVisibleWords(0);
+      setPendingId(replyId);
+      // Let the agent-trail animation finish before the word-by-word text starts.
+      const trailDuration = res.trail ? res.trail.length * 220 + 300 : 0;
+      setTimeout(() => {
+        setPendingId(null);
+        setStreamId(replyId);
+      }, trailDuration);
     }, 350);
     setInput("");
   };
@@ -152,8 +187,14 @@ export function MapView({
                       <AgentTrail steps={m.trail} runKey={m.id} />
                     </div>
                   )}
-                  <div>{m.text}</div>
-                  {m.bullets && (
+                  <div>
+                    {m.id === pendingId
+                      ? ""
+                      : m.id === streamId
+                      ? m.text.split(/\s+/).filter(Boolean).slice(0, visibleWords).join(" ")
+                      : m.text}
+                  </div>
+                  {m.bullets && m.id !== streamId && m.id !== pendingId && (
                     <ul className="mt-2 space-y-1 text-[12px] text-[color:var(--color-slate-navy)]/85">
                       {m.bullets.map((b, i) => (
                         <li key={i} className="flex gap-1.5">
