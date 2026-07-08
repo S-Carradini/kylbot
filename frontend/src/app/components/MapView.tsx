@@ -4,7 +4,7 @@ import { BlueMascot } from "./BlueMascot";
 import { AgentTrail } from "./AgentTrail";
 import { LayerKey, AgentResponse, answerQuery, EXAMPLE_QUESTIONS } from "./data";
 
-const ARCGIS_MAP_URL = "https://experience.arcgis.com/experience/867a5e5600e64e5f9cee4ec34c88d16c";
+const ARCGIS_MAP_URL = "https://experience.arcgis.com/experience/71bc84edbbf9424f9ceb2116acc6bf5a"; // main map
 
 type Msg = {
   id: number;
