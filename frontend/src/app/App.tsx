@@ -7,6 +7,11 @@ import { LayerKey } from "./components/data";
 
 export default function App() {
   const [view, setView] = useState<"home" | "map">("home");
+  const [mapUrl, setMapUrl] = useState<string | undefined>(undefined);
+  const openMap = (url?: string) => {
+    setMapUrl(url);
+    setView("map");
+  };
   const [layers, setLayers] = useState<Set<LayerKey>>(new Set(["ama", "cap"]));
   const [focusPlace, setFocusPlace] = useState<string | undefined>(undefined);
   const [share, setShare] = useState(false);
@@ -24,7 +29,7 @@ export default function App() {
     <div className="size-full">
       {view === "home" ? (
         <WebpageView
-          onOpenMap={() => setView("map")}
+          onOpenMap={() => openMap()}
           onOpenTour={() => setTour(true)}
           onApplyResult={applyResult}
         />
@@ -38,6 +43,7 @@ export default function App() {
           onShare={() => setShare(true)}
           onExport={() => setExp(true)}
           onTour={() => setTour(true)}
+          mapUrl={mapUrl}
         />
       )}
 
@@ -47,7 +53,7 @@ export default function App() {
         <BlueChat
           onLayersOn={(l) => applyResult(l)}
           onFocusPlace={setFocusPlace}
-          onOpenMap={() => setView("map")}
+          onOpenMap={openMap}
         />
       </div>
 

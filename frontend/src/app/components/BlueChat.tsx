@@ -11,9 +11,17 @@ type Msg = {
   text: string;
   bullets?: string[];
   trail?: string[];
+  topic?: string;
   /** True for a reply to a plain greeting — skip the trail/bullets/map-link UI for these. */
   isGreetingReply?: boolean;
 };
+
+const GROUNDWATER_DASHBOARD_URL = "https://asu.maps.arcgis.com/apps/dashboards/57696be87aac421f90ab2033807b7310";
+const GROUNDWATER_MAP_URL = "https://experience.arcgis.com/experience/867a5e5600e64e5f9cee4ec34c88d16c";
+
+function isGroundwaterTopic(topic?: string): boolean {
+  return topic === "Groundwater" || topic === "Trends";
+}
 
 const GREETING_WORDS = new Set([
   "hi", "hello", "hey", "yo", "hiya", "howdy", "sup", "hola",
@@ -62,7 +70,7 @@ export function BlueChat({
 }: {
   onLayersOn: (l: LayerKey[]) => void;
   onFocusPlace: (id?: string) => void;
-  onOpenMap: () => void;
+  onOpenMap: (url?: string) => void;
 }) {
   const [open, setOpen] = useState(false);
   const [confirmRestart, setConfirmRestart] = useState(false);
@@ -151,6 +159,7 @@ export function BlueChat({
         text,
         bullets: failed || greeting ? undefined : res.bullets,
         trail: failed || greeting ? undefined : res.trail,
+        topic: failed || greeting ? undefined : res.topic,
         isGreetingReply: greeting,
       },
     ]);
@@ -287,9 +296,24 @@ export function BlueChat({
                     </div>
                   )}
                   {m.role === "blue" && m.id !== 1 && !m.isGreetingReply && m.id !== streamId && m.id !== pendingId && (
-                    <button onClick={onOpenMap} className="mt-2 text-[11px] text-[color:var(--color-deep-water)] underline underline-offset-2 hover:text-[color:var(--color-river-teal)]">
-                      View on map →
-                    </button>
+                    <div className="mt-2 flex flex-col items-start gap-1">
+                      <button
+                        onClick={() => onOpenMap(isGroundwaterTopic(m.topic) ? GROUNDWATER_MAP_URL : undefined)}
+                        className="text-[11px] text-[color:var(--color-deep-water)] underline underline-offset-2 hover:text-[color:var(--color-river-teal)]"
+                      >
+                        View on map →
+                      </button>
+                      {isGroundwaterTopic(m.topic) && (
+                        <a
+                          href={GROUNDWATER_DASHBOARD_URL}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-[11px] text-[color:var(--color-deep-water)] underline underline-offset-2 hover:text-[color:var(--color-river-teal)]"
+                        >
+                          View groundwater dashboard →
+                        </a>
+                      )}
+                    </div>
                   )}
                 </div>
               </div>

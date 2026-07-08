@@ -24,6 +24,7 @@ export function MapView({
   onExport,
   onTour,
   initialResult,
+  mapUrl,
 }: {
   onBack: () => void;
   layers: Set<LayerKey>;
@@ -34,7 +35,10 @@ export function MapView({
   onExport: () => void;
   onTour: () => void;
   initialResult?: AgentResponse | null;
+  /** Overrides the default main map (e.g. the groundwater-specific map). */
+  mapUrl?: string;
 }) {
+  const activeMapUrl = mapUrl || ARCGIS_MAP_URL;
   const [panelOpen, setPanelOpen] = useState(true);
   const [input, setInput] = useState("");
   const [msgs, setMsgs] = useState<Msg[]>([
@@ -74,7 +78,7 @@ export function MapView({
       {/* Live ArcGIS map — grows/shrinks as panel toggles */}
       <div className="flex-1 min-w-0 relative">
         <iframe
-          src={ARCGIS_MAP_URL}
+          src={activeMapUrl}
           title="Arizona Water Blueprint ArcGIS Map"
           className="w-full h-full"
           style={{ border: "none", display: "block" }}
