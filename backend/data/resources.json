@@ -234,11 +234,11 @@
     "tags": ""
   },
   {
-    "name": "Arizona’s Most Precious Resource Water Story",
-    "type": "Story map",
+    "name": "About My Water",
+    "type": "Web App",
     "description": "",
     "link": "https://azwaterblueprint.asu.edu/resources/about-my-water",
-    "resource_description": "Summary of sources of water supply and policy in Arizona",
+    "resource_description": "Interactive tool for finding your water provider and water security information based on your address",
     "topics": "",
     "tags": ""
   },
