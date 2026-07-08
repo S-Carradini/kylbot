@@ -8,6 +8,14 @@ _STOPWORDS = {
     "about", "with", "can", "you", "tell",
 }
 
+# These are already surfaced via their own dedicated "View on map" / "View groundwater
+# dashboard" buttons in the chat UI — excluded here so the AI doesn't cite them again
+# in its answer text, which would just repeat the same link the buttons already offer.
+_EXCLUDED_FROM_KNOWLEDGE = {
+    "Groundwater Level Change Map (changes in Arizona sub-basins)",
+    "Arizona Groundwater Dashboard",
+}
+
 
 def _tokenize(text: str) -> set[str]:
     words = re.findall(r"[a-zA-Z']+", (text or "").lower())
@@ -23,6 +31,8 @@ class ResourceIndex:
         if path.exists():
             with open(path, encoding="utf-8") as f:
                 self.resources = json.load(f)
+
+        self.resources = [r for r in self.resources if r.get("name") not in _EXCLUDED_FROM_KNOWLEDGE]
 
         self._doc_tokens = []
         for r in self.resources:

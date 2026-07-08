@@ -270,7 +270,7 @@ async def chat_api_post(
     language = resolve_language(language_preference, detected_language)
     response_language = determine_prompt_language(language, language_preference)
 
-    kb_data = resource_index.format_as_knowledge(user_query)
+    kb_data = resource_index.format_as_knowledge(user_query, top_k=6)
 
     # The four fixed quick-topic buttons are meant to be standalone topic-starters,
     # not follow-ups — asking them with no prior history avoids the AI dragging in

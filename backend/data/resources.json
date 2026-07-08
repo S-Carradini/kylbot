@@ -166,9 +166,9 @@
     "type": "GIS App",
     "description": "",
     "link": "https://asu.maps.arcgis.com/apps/webappviewer/index.html?id=b84f6d906be94505b25d68d6af3b02ca",
-    "resource_description": "Comprehensive map of Arizona water resources and policies and additional contextual layers",
-    "topics": "",
-    "tags": ""
+    "resource_description": "Comprehensive interactive map to check your address against Active Management Area (AMA) boundaries, water providers, and other Arizona water resources and policies",
+    "topics": "Active Management Area, AMA, address lookup, water provider",
+    "tags": "AMA, active management area, address, location, boundary, provider"
   },
   {
     "name": "Arizona Groundwater Dashboard",
@@ -184,9 +184,9 @@
     "type": "GIS App",
     "description": "",
     "link": "https://asu.maps.arcgis.com/apps/webappviewer/index.html?id=40ab99d10a224d6c83818fb0e1c153e0",
-    "resource_description": "Map-based data visualization with multiple contextual layers showing changes in groundwater levels of Arizona's 51 groundwater basins over 1-year, 10-year and 20-year periods",
-    "topics": "",
-    "tags": ""
+    "resource_description": "Interactive map to check current groundwater conditions and levels in your area across Arizona's 51 groundwater basins over 1-year, 10-year and 20-year periods",
+    "topics": "groundwater levels, groundwater trends, my area, basin",
+    "tags": "groundwater, area, levels, trends, basin, current, conditions"
   },
   {
     "name": "Longterm storage credits in Arizona dashboard",
@@ -238,9 +238,9 @@
     "type": "Web App",
     "description": "",
     "link": "https://azwaterblueprint.asu.edu/resources/about-my-water",
-    "resource_description": "Interactive tool for finding your water provider and water security information based on your address",
-    "topics": "",
-    "tags": ""
+    "resource_description": "Interactive tool to check how secure and reliable your water supply is by looking up your address, your water provider, and their assured water supply status",
+    "topics": "water security, water supply, assured water supply",
+    "tags": "secure, security, supply, assured, reliable, provider, address"
   },
   {
     "name": "Central AZ Colorado River Shortage Impact Analysis",

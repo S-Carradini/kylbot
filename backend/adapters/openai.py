@@ -37,9 +37,11 @@ class OpenAIAdapter(ModelAdapter):
         {kb_data}
         </resources>
 
-        When one of these resources is directly relevant, mention it as a Markdown link using its name
-        as the link text, e.g. [Resource Name](https://example.com). Never show the raw URL by itself.
-        Do not invent resources or links that are not listed above.
+        Mention every resource above that is directly relevant to the user's question, not just one —
+        the user should not miss out on any relevant resource. Link each as a Markdown link using its
+        name as the link text, e.g. [Resource Name](https://example.com). Never show the raw URL by
+        itself. Do not invent resources or links that are not listed above, and do not force in a
+        resource that isn't actually relevant just to include more links.
         """
             knowledge_block_es = f"""
         Recursos relevantes del Kyl Center / Arizona Water Blueprint que puedes mencionar y enlazar si es útil:
@@ -47,9 +49,11 @@ class OpenAIAdapter(ModelAdapter):
         {kb_data}
         </resources>
 
-        Cuando uno de estos recursos sea directamente relevante, menciónalo como un enlace en formato Markdown
-        usando su nombre como texto del enlace, ej. [Nombre del Recurso](https://ejemplo.com). Nunca muestres la URL sola.
-        No inventes recursos ni enlaces que no estén en la lista anterior.
+        Menciona todos los recursos anteriores que sean directamente relevantes para la pregunta del usuario,
+        no solo uno — el usuario no debe perderse ningún recurso relevante. Enlaza cada uno como un enlace en
+        formato Markdown usando su nombre como texto del enlace, ej. [Nombre del Recurso](https://ejemplo.com).
+        Nunca muestres la URL sola. No inventes recursos ni enlaces que no estén en la lista anterior, y no
+        fuerces un recurso que no sea realmente relevante solo para incluir más enlaces.
         """
 
         # System prompt based on endpoint type
