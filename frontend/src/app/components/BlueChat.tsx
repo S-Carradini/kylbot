@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { Send, Layers, MapPin, BookOpen, X, RotateCcw } from "lucide-react";
+import { Send, Layers, MapPin, BookOpen, X, RotateCcw, Copy, Check, Download } from "lucide-react";
 import { BlueMascot } from "./BlueMascot";
 import { AgentResponse, LayerKey, answerQuery } from "./data";
 import { AgentTrail } from "./AgentTrail";
@@ -74,7 +74,40 @@ export function BlueChat({
 }) {
   const [open, setOpen] = useState(false);
   const [confirmRestart, setConfirmRestart] = useState(false);
+  const [showHint, setShowHint] = useState(false);
+  const [hintDismissed, setHintDismissed] = useState(false);
+  const [copiedId, setCopiedId] = useState<number | null>(null);
   const [input, setInput] = useState("");
+
+  const copyMsg = (m: Msg) => {
+    const lines = [m.text, ...(m.bullets ?? [])].join("\n• ");
+    navigator.clipboard.writeText(lines);
+    setCopiedId(m.id);
+    setTimeout(() => setCopiedId(null), 1800);
+  };
+
+  const downloadTranscript = () => {
+    const lines = msgs.map((m) => {
+      const speaker = m.role === "user" ? "You" : "Blue";
+      const body = [m.text, ...(m.bullets ?? []).map((b) => `  • ${b}`)].join("\n");
+      return `[${speaker}]\n${body}`;
+    });
+    const text = `Arizona Water Blueprint — Blue Chat Transcript\n${"─".repeat(48)}\n\n${lines.join("\n\n")}`;
+    const blob = new Blob([text], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "blue-chat-transcript.txt";
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  useEffect(() => {
+    if (open || hintDismissed) return;
+    const t = setTimeout(() => setShowHint(true), 2000);
+    return () => clearTimeout(t);
+  }, [open, hintDismissed]);
+
   const [msgs, setMsgs] = useState<Msg[]>([
     {
       id: 1,
@@ -183,21 +216,114 @@ export function BlueChat({
 
   return (
     <>
+      {/* Keyframe styles for the floating mascot button */}
+      <style>{`
+        @keyframes blueRing1 {
+          0%   { transform: scale(1);   opacity: 0.55; }
+          100% { transform: scale(2.1); opacity: 0; }
+        }
+        @keyframes blueRing2 {
+          0%   { transform: scale(1);   opacity: 0.4; }
+          100% { transform: scale(2.6); opacity: 0; }
+        }
+        @keyframes blueRing3 {
+          0%   { transform: scale(1);   opacity: 0.25; }
+          100% { transform: scale(3.1); opacity: 0; }
+        }
+        @keyframes blueBob {
+          0%, 100% { transform: translateY(0px); }
+          50%       { transform: translateY(-5px); }
+        }
+        @keyframes badgeGlow {
+          0%, 100% { box-shadow: 0 0 0 0 rgba(62,193,211,0.7); }
+          50%       { box-shadow: 0 0 0 6px rgba(62,193,211,0); }
+        }
+        @keyframes hintSlide {
+          0%   { opacity: 0; transform: translateX(12px); }
+          100% { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes labelPop {
+          0%   { opacity: 0; transform: translateY(6px) scale(0.95); }
+          100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .blue-bob { animation: blueBob 2.8s ease-in-out infinite; }
+        .blue-ring-1 { animation: blueRing1 2s ease-out infinite; }
+        .blue-ring-2 { animation: blueRing2 2s ease-out infinite 0.5s; }
+        .blue-ring-3 { animation: blueRing3 2s ease-out infinite 1s; }
+        .blue-badge  { animation: badgeGlow 1.8s ease-in-out infinite; }
+        .blue-hint   { animation: hintSlide 0.3s ease-out forwards; }
+        .blue-label  { animation: labelPop 0.4s ease-out forwards; }
+        .blue-btn:hover .blue-bob { animation-play-state: paused; }
+      `}</style>
+
       {/* Floating mascot — hidden when panel is open */}
       {!open && (
-        <button
-          onClick={() => setOpen(true)}
-          className="fixed bottom-6 right-6 z-40"
-          aria-label="Open Blue assistant"
-        >
-          <div className="relative">
-            <div className="absolute inset-0 rounded-full bwi-pulse" />
-            <div className="relative w-16 h-16 rounded-full bg-white shadow-[0_10px_30px_rgba(10,61,98,0.2)] border border-[color:var(--color-mist-blue)] flex items-center justify-center">
-              <BlueMascot size={56} variant="character" />
+        <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-3">
+
+          {/* Speech bubble hint */}
+          {showHint && !hintDismissed && (
+            <div className="blue-hint flex items-start gap-2 bg-white rounded-2xl rounded-br-sm px-4 py-3 shadow-[0_8px_32px_rgba(10,61,98,0.18)] border border-[color:var(--color-mist-blue)] max-w-[220px]">
+              <div className="flex-1">
+                <p className="text-xs font-semibold text-[color:var(--color-deep-water)] leading-snug">
+                  👋 Hi, I'm Blue!
+                </p>
+                <p className="text-[11px] text-[color:var(--color-slate-navy)]/75 mt-0.5 leading-snug">
+                  Ask me anything about Arizona water.
+                </p>
+                <button
+                  onClick={() => setOpen(true)}
+                  className="mt-2 text-[11px] font-semibold text-[color:var(--color-river-teal)] hover:text-[color:var(--color-deep-water)] transition"
+                >
+                  Get started →
+                </button>
+              </div>
+              <button
+                onClick={() => { setShowHint(false); setHintDismissed(true); }}
+                className="text-[color:var(--color-slate-navy)]/30 hover:text-[color:var(--color-slate-navy)]/60 mt-0.5 shrink-0"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
             </div>
-            <div className="absolute -top-2 -right-2 bg-[color:var(--color-cyan-glow)] text-white text-[10px] px-1.5 py-0.5 rounded-full font-semibold">AI</div>
-          </div>
-        </button>
+          )}
+
+          {/* "Ask Blue" label */}
+          {!showHint && (
+            <div className="blue-label bg-[color:var(--color-deep-water)] text-white text-[11px] font-semibold px-3 py-1 rounded-full shadow-md">
+              Ask Blue
+            </div>
+          )}
+
+          {/* Main button */}
+          <button
+            onClick={() => { setOpen(true); setShowHint(false); }}
+            className="blue-btn relative flex items-center justify-center"
+            aria-label="Open Blue assistant"
+            style={{ width: 104, height: 104 }}
+          >
+            {/* Triple pulse rings */}
+            <span className="blue-ring-1 absolute inset-0 rounded-full bg-[color:var(--color-cyan-glow)]/40 pointer-events-none" />
+            <span className="blue-ring-2 absolute inset-0 rounded-full bg-[color:var(--color-cyan-glow)]/25 pointer-events-none" />
+            <span className="blue-ring-3 absolute inset-0 rounded-full bg-[color:var(--color-cyan-glow)]/15 pointer-events-none" />
+
+            {/* Button face — prominent circle with gradient ring */}
+            <div
+              className="relative w-[104px] h-[104px] rounded-full flex items-center justify-center hover:scale-105 transition-transform duration-200 overflow-hidden"
+              style={{
+                background: "linear-gradient(135deg, #e8f8fb 0%, #c8eff5 100%)",
+                boxShadow: "0 16px 48px rgba(10,61,98,0.35), 0 0 0 4px rgba(62,193,211,0.55), 0 0 0 8px rgba(62,193,211,0.18)",
+              }}
+            >
+              <div className="blue-bob">
+                <BlueMascot size={86} variant="character" />
+              </div>
+            </div>
+
+            {/* Glowing AI badge */}
+            <div className="blue-badge absolute top-0 right-0 bwi-grad text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
+              AI
+            </div>
+          </button>
+        </div>
       )}
 
       {/* Chat panel — flush to bottom-right edge */}
@@ -212,6 +338,13 @@ export function BlueChat({
               <div className="font-display text-sm font-semibold">Blue · Arizona Water Blueprint</div>
               <div className="text-[11px] text-white/70">Kyl Center for Water Policy</div>
             </div>
+            <button
+              onClick={downloadTranscript}
+              className="text-white/70 hover:text-white transition p-1 rounded-lg hover:bg-white/10"
+              title="Download transcript"
+            >
+              <Download className="w-4 h-4" />
+            </button>
             <button
               onClick={() => { setConfirmRestart(true); }}
               className="text-white/70 hover:text-white transition p-1 rounded-lg hover:bg-white/10"
@@ -253,13 +386,14 @@ export function BlueChat({
           {/* Messages */}
           <div ref={ref} className="flex-1 overflow-y-auto overflow-x-hidden bwi-scroll px-4 py-3 space-y-3 bg-[color:var(--color-cloud-white)]">
             {msgs.map((m) => (
-              <div key={m.id} className={`flex gap-2 min-w-0 ${m.role === "user" ? "justify-end" : ""}`}>
+              <div key={m.id} className={`flex gap-2 min-w-0 group ${m.role === "user" ? "justify-end" : ""}`}>
                 {m.role === "blue" && (
                   <div className="w-8 h-8 rounded-full bg-white border border-[color:var(--color-mist-blue)] flex items-center justify-center shrink-0">
                     <BlueMascot size={28} variant="original" />
                   </div>
                 )}
-                <div className={`max-w-[80%] min-w-0 rounded-2xl px-3 py-2 text-sm break-words overflow-wrap-anywhere ${
+                <div className="flex flex-col gap-1 max-w-[80%] min-w-0">
+                <div className={`min-w-0 rounded-2xl px-3 py-2 text-sm break-words overflow-wrap-anywhere ${
                   m.role === "user"
                     ? "bwi-grad text-white rounded-br-sm"
                     : "bg-white border border-[color:var(--color-soft-gray)] text-[color:var(--color-slate-navy)] rounded-bl-sm"
@@ -315,6 +449,22 @@ export function BlueChat({
                       )}
                     </div>
                   )}
+                </div>
+
+                {m.id !== streamId && m.id !== pendingId && (
+                  <div className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}>
+                    <button
+                      onClick={() => copyMsg(m)}
+                      className="opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full border border-[color:var(--color-soft-gray)] bg-white text-[color:var(--color-slate-navy)]/60 hover:text-[color:var(--color-deep-water)] hover:border-[color:var(--color-cyan-glow)]"
+                      title="Copy to clipboard"
+                    >
+                      {copiedId === m.id
+                        ? <><Check className="w-3 h-3 text-[color:var(--color-river-teal)]" /> Copied</>
+                        : <><Copy className="w-3 h-3" /> Copy</>
+                      }
+                    </button>
+                  </div>
+                )}
                 </div>
               </div>
             ))}
