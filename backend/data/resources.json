@@ -202,9 +202,9 @@
     "type": "GIS App",
     "description": "",
     "link": "https://experience.arcgis.com/experience/d74d9265134c44c1ba385796d95769d4/",
-    "resource_description": "Data visualization of Colorado River entitlements, leases and exchanges in Arizona, and how shortage impacts entitlement holders by priority",
-    "topics": "Colorado River shortage, entitlements, access",
-    "tags": "Colorado River, shortage, impact, entitlements, access"
+    "resource_description": "Data visualization of which cities and entities are leasing, holding, or exchanging Colorado River water entitlements in Arizona, and how shortage impacts entitlement holders by priority",
+    "topics": "Colorado River shortage, entitlements, access, leasing",
+    "tags": "Colorado River, shortage, impact, entitlements, access, leasing, lease, cities"
   },
   {
     "name": "Colorado River Shortage Impact Tool",
