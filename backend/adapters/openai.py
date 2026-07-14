@@ -37,11 +37,13 @@ class OpenAIAdapter(ModelAdapter):
         {kb_data}
         </resources>
 
-        Mention every resource above that is directly relevant to the user's question, not just one —
-        the user should not miss out on any relevant resource. Link each as a Markdown link using its
-        name as the link text, e.g. [Resource Name](https://example.com). Never show the raw URL by
-        itself. Do not invent resources or links that are not listed above, and do not force in a
-        resource that isn't actually relevant just to include more links.
+        After your explanation, add a line "Relevant resources:" followed by one bullet per resource
+        above that is directly relevant to the user's question — do not skip any relevant one just to
+        save space, and do not force in a resource that isn't actually relevant. Each bullet must be:
+        "- [Resource Name](https://example.com) — " followed by a short (under 12 words) note on what
+        that specific resource covers, so the user knows what to expect before clicking. Never show a
+        raw URL by itself, and never invent a resource or link that isn't listed above. If none of the
+        resources above are truly relevant, omit the "Relevant resources:" section entirely.
         """
             knowledge_block_es = f"""
         Recursos relevantes del Kyl Center / Arizona Water Blueprint que puedes mencionar y enlazar si es útil:
@@ -49,11 +51,14 @@ class OpenAIAdapter(ModelAdapter):
         {kb_data}
         </resources>
 
-        Menciona todos los recursos anteriores que sean directamente relevantes para la pregunta del usuario,
-        no solo uno — el usuario no debe perderse ningún recurso relevante. Enlaza cada uno como un enlace en
-        formato Markdown usando su nombre como texto del enlace, ej. [Nombre del Recurso](https://ejemplo.com).
-        Nunca muestres la URL sola. No inventes recursos ni enlaces que no estén en la lista anterior, y no
-        fuerces un recurso que no sea realmente relevante solo para incluir más enlaces.
+        Después de tu explicación, agrega una línea "Recursos relevantes:" seguida de una viñeta por cada
+        recurso anterior que sea directamente relevante para la pregunta del usuario — no omitas ninguno
+        relevante por ahorrar espacio, y no fuerces un recurso que no sea realmente relevante. Cada viñeta
+        debe tener el formato: "- [Nombre del Recurso](https://ejemplo.com) — " seguido de una nota breve
+        (menos de 12 palabras) sobre qué cubre ese recurso, para que el usuario sepa qué esperar antes de
+        hacer clic. Nunca muestres una URL sola, y nunca inventes un recurso o enlace que no esté en la
+        lista anterior. Si ninguno de los recursos anteriores es realmente relevante, omite por completo
+        la sección "Recursos relevantes:".
         """
 
         # System prompt based on endpoint type
@@ -95,7 +100,9 @@ class OpenAIAdapter(ModelAdapter):
         antes" ni nombres ningún lugar discutido anteriormente. Usa un lugar mencionado antes solo si el mensaje
         actual del usuario lo repite explícitamente o continúa claramente ese mismo tema.
         {knowledge_block_es}
-        Responde en 150 palabras o menos con un tono cercano, sin usar listas.
+        Tu explicación (antes de la sección "Recursos relevantes:", si existe) debe tener 150 palabras o
+        menos, con un tono cercano, sin usar listas. Ese límite de 150 palabras no aplica a las viñetas de
+        "Recursos relevantes:" — incluye cada recurso relevante aunque esa sección sea más larga.
 
         En respuestas más largas, separa los párrafos con saltos de línea y agrega un salto adicional antes de la frase de cierre.
 
@@ -139,9 +146,12 @@ class OpenAIAdapter(ModelAdapter):
         earlier" or name any earlier-discussed place. Only use an earlier-mentioned place if the user's current
         message explicitly repeats it or clearly continues that exact topic (e.g. "what about there?").
         {knowledge_block_en}
-        You should answer in 150 words or less in a friendly tone and include details within the word limit.
+        Your explanation (before the "Relevant resources:" section, if any) should be 150 words or less,
+        in a friendly tone, and include details within that limit. The 150-word limit does not apply to
+        the "Relevant resources:" bullets — include every relevant one even if that section runs longer.
 
-        Avoid lists.
+        Avoid lists in your explanation — but the "Relevant resources:" section, when present, must always
+        be formatted as bullets as instructed above.
 
         For longer responses (2 sentences), please separate each paragraph with a line break to improve readability. Additionally, add a line break before the closing line.
 
