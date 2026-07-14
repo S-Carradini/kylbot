@@ -21,7 +21,7 @@
     "name": "Groundwater Protection in the Valley of the Sun",
     "type": "PDF",
     "description": "History of Phoenix-area urban users' shift from reliance on groundwater, analysis of the impacts of Colorado River shortage on groundwater supplies and recommendations for improved groundwater management",
-    "link": "https://experience.arcgis.com/experience/867a5e5600e64e5f9cee4ec34c88d16c",
+    "link": "https://morrisoninstitute.asu.edu/sites/g/files/litvpz841/files/2024-04/ASU-KC-GrndwtrRprt-FNL-HR-4.pdf",
     "resource_description": "History of central Arizona's move away from groundwater reliant development and investments in surface water treatment plants and aquifer recharge; analysis of tradeoffs inherent in continued reliance on groundwater; suggestions for policy changes to improve groundwater protection",
     "topics": "",
     "tags": ""
@@ -202,9 +202,18 @@
     "type": "GIS App",
     "description": "",
     "link": "https://experience.arcgis.com/experience/d74d9265134c44c1ba385796d95769d4/",
-    "resource_description": "Data visualization of Colorado River entitlements, leases and exchanges in Arizona; analyses of entitlement holders by priority",
-    "topics": "",
-    "tags": ""
+    "resource_description": "Data visualization of Colorado River entitlements, leases and exchanges in Arizona, and how shortage impacts entitlement holders by priority",
+    "topics": "Colorado River shortage, entitlements, access",
+    "tags": "Colorado River, shortage, impact, entitlements, access"
+  },
+  {
+    "name": "Colorado River Shortage Impact Tool",
+    "type": "GIS App",
+    "description": "",
+    "link": "https://datastudio.google.com/embed/reporting/8e766e22-b9b5-4354-beda-a9afdd5a3321/page/p_7npt5oe13d",
+    "resource_description": "Data visualization tool showing how Colorado River shortage impacts water supply across Arizona",
+    "topics": "Colorado River shortage",
+    "tags": "Colorado River, shortage, impact"
   },
   {
     "name": "Rural Water in AZ",
