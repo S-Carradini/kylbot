@@ -104,7 +104,7 @@ app.add_middleware(
     allow_origins=[
         os.getenv("FRONTEND_URL", "http://localhost:5173"),
         "http://localhost:5173",
-        "http://localhost:3000",
+        "http://localhost:8000",
     ],
     allow_credentials=True,
     allow_methods=["GET", "POST", "OPTIONS"],
@@ -334,12 +334,6 @@ async def _serve_react_spa():
 @app.get("/", response_class=HTMLResponse)
 async def root(request: Request):
     return await _serve_react_spa()
-
-
-@app.get("/widget", response_class=HTMLResponse)
-async def widget_page():
-    """Standalone chat widget meant to be embedded via <iframe> on a client's own webpage."""
-    return FileResponse(str(pathlib.Path(__file__).parent / "static" / "widget.html"))
 
 
 @app.post('/api/tts')
