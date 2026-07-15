@@ -109,8 +109,11 @@ export function answerQuery(q: string): AgentResponse {
     };
   }
 
-  // What's the groundwater like in my area?
-  if (lower.includes("groundwater like") || (lower.includes("groundwater") && lower.includes("area")) || lower.includes("aquifer")) {
+  // Any question mentioning groundwater/aquifers — kept broad (not requiring
+  // "area" to co-occur) so the map-routing logic reliably recognizes it as a
+  // groundwater topic and opens the groundwater map/dashboard, not the
+  // default main map.
+  if (lower.includes("groundwater") || lower.includes("aquifer")) {
     return {
       trail,
       summary: "Groundwater conditions vary significantly across Arizona. Aquifer health depends on recharge rates, pumping, and CAP deliveries.",

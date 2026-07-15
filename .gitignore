@@ -8,3 +8,4 @@ frontend/dist/
 
 venv/
 *.log
+backend/data/pdf_cache/

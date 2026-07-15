@@ -13,6 +13,8 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from managers.memory_manager import MemoryManager
 from managers.resource_index import ResourceIndex
+from managers.term_index import TermIndex
+from managers.pdf_index import PdfContentIndex
 
 from adapters.openai import OpenAIAdapter
 from openai import OpenAI
@@ -143,6 +145,8 @@ app.add_middleware(SessionMiddleware, secret_key=secret_key)
 llm_adapter = OpenAIAdapter("gpt-4.1")
 memory = MemoryManager()
 resource_index = ResourceIndex(pathlib.Path(__file__).parent / "data" / "resources.json")
+term_index = TermIndex(pathlib.Path(__file__).parent / "data" / "term_definitions.json")
+pdf_index = PdfContentIndex(pathlib.Path(__file__).parent / "data" / "pdf_cache")
 
 
 @app.post("/session-transcript")
@@ -271,6 +275,19 @@ async def chat_api_post(
     response_language = determine_prompt_language(language, language_preference)
 
     kb_data = resource_index.format_as_knowledge(user_query, top_k=8)
+    term_data = term_index.format_as_knowledge(user_query, top_k=3)
+
+    # Ground the answer in real excerpts from the actual PDF resources, not
+    # just their one-line descriptions. Capped to the top 2 PDF matches —
+    # downloading/parsing a PDF (only happens once per PDF, then cached)
+    # takes a couple seconds, so we bound how many we fetch per question.
+    matched_resources = resource_index.search(user_query, top_k=8)
+    doc_excerpt_parts = []
+    for r in [m for m in matched_resources if m.get("type") == "PDF"][:2]:
+        excerpt = await asyncio.to_thread(pdf_index.get_excerpt, r, user_query)
+        if excerpt:
+            doc_excerpt_parts.append(f"- From \"{r['name']}\" ({r.get('link', '')}):\n  \"{excerpt}\"")
+    doc_excerpts = "\n\n".join(doc_excerpt_parts)
 
     # The four fixed quick-topic buttons are meant to be standalone topic-starters,
     # not follow-ups — asking them with no prior history avoids the AI dragging in
@@ -280,7 +297,9 @@ async def chat_api_post(
     llm_body = await llm_adapter.get_llm_body(
         chat_history=chat_history,
         kb_data=kb_data,
-        temperature=.5,
+        term_data=term_data,
+        doc_excerpts=doc_excerpts,
+        temperature=.6,
         max_tokens=2000,
         endpoint_type="spanish" if response_language == 'es' else "default"
     )

@@ -5,3 +5,5 @@ itsdangerous
 langdetect
 python-dotenv
 python-multipart
+pypdf
+requests
