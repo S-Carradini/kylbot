@@ -125,23 +125,15 @@ export function BlueChatPanel({
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Scroll the newest message (or the typing indicator) into view at the top,
-    // so long answers are read from the start instead of jumping to the bottom.
-    const container = ref.current;
-    if (!container) return;
-    const last = container.lastElementChild;
-    last?.scrollIntoView({ behavior: "smooth", block: "start" });
-  }, [msgs, isTyping]);
-
-  useEffect(() => {
-    // As the word-by-word reveal grows the answer taller, keep following it
-    // downward — otherwise the box stays put and the user has to manually
-    // scroll to see text that's still being "typed" below the fold.
-    if (streamId === null) return;
+    // Keep following the bottom as new content appears — the new question,
+    // the typing indicator, each word as it streams in, and finally the
+    // "Relevant resources" links / "View on map" buttons once streaming ends.
+    // A single consistent bottom-follow avoids the answer settling with its
+    // last part (links, buttons) rendered below the fold.
     const container = ref.current;
     if (!container) return;
     container.scrollTo({ top: container.scrollHeight, behavior: "smooth" });
-  }, [visibleWords, streamId]);
+  }, [msgs, isTyping, visibleWords, streamId]);
 
   useEffect(() => {
     if (streamId === null) return;
