@@ -162,10 +162,10 @@
     "tags": "Danielle recommends deprioritizing"
   },
   {
-    "name": "Arizona Water Blueprint [map]",
+    "name": "Arizona Water Blueprint Map",
     "type": "GIS App",
     "description": "",
-    "link": "https://asu.maps.arcgis.com/apps/webappviewer/index.html?id=b84f6d906be94505b25d68d6af3b02ca",
+    "link": "https://experience.arcgis.com/experience/71bc84edbbf9424f9ceb2116acc6bf5a",
     "resource_description": "Comprehensive interactive map to check your address against Active Management Area (AMA) boundaries, water providers, and other Arizona water resources and policies",
     "topics": "Active Management Area, AMA, address lookup, water provider",
     "tags": "AMA, active management area, address, location, boundary, provider"
@@ -183,7 +183,7 @@
     "name": "Groundwater Level Change Map (changes in Arizona sub-basins)",
     "type": "GIS App",
     "description": "",
-    "link": "https://asu.maps.arcgis.com/apps/webappviewer/index.html?id=40ab99d10a224d6c83818fb0e1c153e0",
+    "link": "https://experience.arcgis.com/experience/867a5e5600e64e5f9cee4ec34c88d16c",
     "resource_description": "Interactive map to check current groundwater conditions and levels in your area across Arizona's 51 groundwater basins over 1-year, 10-year and 20-year periods",
     "topics": "groundwater levels, groundwater trends, my area, basin",
     "tags": "groundwater, area, levels, trends, basin, current, conditions"
@@ -205,15 +205,6 @@
     "resource_description": "Data visualization of which cities and entities are leasing, holding, or exchanging Colorado River water entitlements in Arizona, and how shortage impacts entitlement holders by priority",
     "topics": "Colorado River shortage, entitlements, access, leasing",
     "tags": "Colorado River, shortage, impact, entitlements, access, leasing, lease, cities"
-  },
-  {
-    "name": "Colorado River Shortage Impact Tool",
-    "type": "GIS App",
-    "description": "",
-    "link": "https://datastudio.google.com/embed/reporting/8e766e22-b9b5-4354-beda-a9afdd5a3321/page/p_7npt5oe13d",
-    "resource_description": "Data visualization tool showing how Colorado River shortage impacts water supply across Arizona",
-    "topics": "Colorado River shortage",
-    "tags": "Colorado River, shortage, impact"
   },
   {
     "name": "Rural Water in AZ",
@@ -253,12 +244,12 @@
   },
   {
     "name": "Central AZ Colorado River Shortage Impact Analysis",
-    "type": "Story map",
+    "type": "GIS App",
     "description": "",
-    "link": "https://asu.maps.arcgis.com/apps/dashboards/37e786165c734e47918c1f4c3c0dbea5",
+    "link": "https://datastudio.google.com/embed/reporting/8e766e22-b9b5-4354-beda-a9afdd5a3321/page/p_7npt5oe13d",
     "resource_description": "Data visualization tool showing how individual CAP water users’ access to Colorado River water supply portfolios will be impacted by increasingly severe cuts",
-    "topics": "",
-    "tags": ""
+    "topics": "Colorado River shortage",
+    "tags": "Colorado River, shortage, impact"
   },
   {
     "name": "Big Picture: Health and Function of  Arizona's Watersheds",
