@@ -8,11 +8,15 @@ _STOPWORDS = {
     "about", "with", "can", "you", "tell",
 }
 
-# These are already surfaced via their own dedicated "View on map" / "View groundwater
-# dashboard" buttons in the chat UI — excluded here so the AI doesn't cite them again
-# in its answer text, which would just repeat the same link the buttons already offer.
+# Already surfaced via its own dedicated "View groundwater dashboard" button in the
+# chat UI — excluded here so the AI doesn't cite it again in its answer text, which
+# would just repeat the same link the button already offers.
+#
+# Note: "Groundwater Level Change Map" is intentionally NOT excluded (despite having
+# its own "View on map" button too) — client feedback showed it should still be named
+# explicitly in the answer text for questions specifically about rate-of-change data,
+# since the button alone doesn't tell the user what the tool actually shows.
 _EXCLUDED_FROM_KNOWLEDGE = {
-    "Groundwater Level Change Map (changes in Arizona sub-basins)",
     "Arizona Groundwater Dashboard",
 }
 
