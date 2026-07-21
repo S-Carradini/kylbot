@@ -74,6 +74,30 @@ export function answerQuery(q: string): AgentResponse {
     "Ready",
   ];
 
+  // Any question mentioning groundwater/aquifers — checked FIRST, before every
+  // other topic (including Security, AMA, and the place-name lookup below),
+  // so a groundwater question always routes to the groundwater map/dashboard
+  // no matter what else the question also mentions. E.g. "groundwater level
+  // change in the Phoenix AMA" mentions both "groundwater" and "AMA" (which
+  // contains "ama" as a substring), and "How secure is my groundwater
+  // supply?" contains "water supply" — either could otherwise be caught by
+  // an earlier check. Kept broad (not requiring "area" to co-occur).
+  if (lower.includes("groundwater") || lower.includes("aquifer")) {
+    return {
+      trail,
+      summary: "Groundwater conditions vary significantly across Arizona. Aquifer health depends on recharge rates, pumping, and CAP deliveries.",
+      bullets: [
+        "Salt River Valley: relatively stable due to CAP recharge",
+        "Willcox Basin: unregulated, water table declining ~3–5 ft/year",
+        "Tucson Basin: conjunctive use keeps levels stable",
+        "Hassayampa (Buckeye): rapid growth driving groundwater declines",
+        "How do I check groundwater data for my specific area?",
+      ],
+      layersOn: ["basins", "quality"],
+      topic: "Groundwater",
+    };
+  }
+
   // How secure is my water supply?
   if (lower.includes("secure") && lower.includes("water supply") || lower.includes("water supply")) {
     return {
@@ -91,30 +115,7 @@ export function answerQuery(q: string): AgentResponse {
     };
   }
 
-  // Any question mentioning groundwater/aquifers — checked BEFORE the AMA
-  // check below (even though it's listed second in EXAMPLE_QUESTIONS order),
-  // because a question like "groundwater level change in the Phoenix AMA"
-  // mentions both "groundwater" and "AMA" (Phoenix AMA contains the substring
-  // "ama"), and it should route to the groundwater map/dashboard, not the
-  // default main map. Kept broad (not requiring "area" to co-occur) so the
-  // map-routing logic reliably recognizes it as a groundwater topic.
-  if (lower.includes("groundwater") || lower.includes("aquifer")) {
-    return {
-      trail,
-      summary: "Groundwater conditions vary significantly across Arizona. Aquifer health depends on recharge rates, pumping, and CAP deliveries.",
-      bullets: [
-        "Salt River Valley: relatively stable due to CAP recharge",
-        "Willcox Basin: unregulated, water table declining ~3–5 ft/year",
-        "Tucson Basin: conjunctive use keeps levels stable",
-        "Hassayampa (Buckeye): rapid growth driving declines",
-        "How do I check groundwater data for my specific area?",
-      ],
-      layersOn: ["basins", "quality"],
-      topic: "Groundwater",
-    };
-  }
-
-  // Is my address within an AMA? (checked after groundwater — see comment above)
+  // Is my address within an AMA?
   if (lower.includes("address") && lower.includes("ama") || lower.includes("active management area") || lower.includes("ama") || lower.includes("forest")) {
     return {
       trail,
