@@ -136,6 +136,15 @@ html, body, #root {
   font-family: 'Inter', system-ui, sans-serif;
   background: var(--color-cloud-white);
 }
+
+/* The /widget route renders inside a transparent host iframe (see
+   waterbot-embed.js) — it must not paint the app's opaque background.
+   !important guards against Tailwind's `body { @apply bg-background }`
+   base-layer rule, in case a future refactor moves this rule into a layer
+   too (cascade layers are otherwise unordered relative to each other). */
+html.wb-widget-mode, html.wb-widget-mode body, html.wb-widget-mode #root {
+  background: transparent !important;
+}
 .font-display { font-family: 'Sora', 'Inter', sans-serif; letter-spacing: -0.01em; }
 
 .bwi-grad {

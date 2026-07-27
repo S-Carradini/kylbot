@@ -384,6 +384,16 @@ async def serve_react_app(full_path: str, request: Request):
         full_path.startswith("assets/")):
         raise HTTPException(status_code=404, detail="Not found")
 
+    # Files copied into the build root by Vite's public/ dir (e.g. waterbot-embed.js,
+    # robots.txt) live alongside index.html — serve them directly instead of falling
+    # through to the SPA shell, which would return HTML with the wrong content-type.
+    if frontend_dist_path:
+        candidate = (frontend_dist_path / full_path).resolve()
+        if (candidate.is_file()
+                and frontend_dist_path in candidate.parents
+                and candidate != frontend_dist_path / "index.html"):
+            return FileResponse(str(candidate))
+
     return await _serve_react_spa()
 
 
