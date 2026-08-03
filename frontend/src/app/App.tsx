@@ -4,6 +4,7 @@ import { WebpageView } from "./components/WebpageView";
 import { MapView } from "./components/MapView";
 import { BlueChat } from "./components/BlueChat";
 import { ChatPage } from "./pages/ChatPage";
+import { WidgetPage } from "./pages/WidgetPage";
 import { ExportModal, ShareModal, TourModal } from "./components/Modals";
 import { LayerKey } from "./components/data";
 
@@ -69,14 +70,16 @@ export default function App() {
             />
           }
         />
+        <Route path="/widget" element={<WidgetPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
 
       {/* The floating widget only makes sense on the home/map route — the /chat
-          route has its own full-screen chat UI. Kept mounted (just hidden) while
+          route has its own full-screen chat UI, and /widget renders its own
+          embedded BlueChat for iframe use. Kept mounted (just hidden) while
           on the map screen so the conversation survives going Home instead of
           resetting — it only clears on Restart. */}
-      {location.pathname !== "/chat" && (
+      {location.pathname !== "/chat" && location.pathname !== "/widget" && (
         <div style={{ display: view === "map" ? "none" : "contents" }}>
           <BlueChat
             onLayersOn={(l) => applyResult(l)}

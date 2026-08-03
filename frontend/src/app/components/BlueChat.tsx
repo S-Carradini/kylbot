@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { X } from "lucide-react";
 import { BlueMascot } from "./BlueMascot";
 import { BlueChatPanel } from "./BlueChatPanel";
@@ -8,10 +8,16 @@ export function BlueChat({
   onLayersOn,
   onFocusPlace,
   onOpenMap,
+  embedded = false,
 }: {
   onLayersOn: (l: LayerKey[]) => void;
   onFocusPlace: (id?: string) => void;
   onOpenMap: (url?: string) => void;
+  /** Renders for the standalone /widget route (loaded in a host page's iframe
+   *  via waterbot-embed.js): fills its container instead of pinning to the
+   *  viewport, and reports size changes to the host via postMessage so it can
+   *  resize the iframe to match. */
+  embedded?: boolean;
 }) {
   const [open, setOpen] = useState(false);
   const [showHint, setShowHint] = useState(false);
@@ -22,6 +28,71 @@ export function BlueChat({
     const t = setTimeout(() => setShowHint(true), 2000);
     return () => clearTimeout(t);
   }, [open, hintDismissed]);
+
+  const widgetState: "mascot" | "nudge" | "expanded" = open
+    ? "expanded"
+    : showHint && !hintDismissed
+      ? "nudge"
+      : "mascot";
+
+  // Only the closed (mascot/nudge) states are measured — their footprint is
+  // driven by content (the "Ask Blue" label, the hint bubble) so a hardcoded
+  // size in the host embed script would drift out of sync and clip content.
+  // The expanded panel is a fixed chat-window footprint, not content-sized,
+  // so the host applies its own (viewport-aware) size for that state.
+  const closedRef = useRef<HTMLDivElement>(null);
+
+  // The iframe can only ever be as wide as the host has *already* sized it to
+  // — an element can't lay out wider than its own viewport. So when mascot
+  // (~170px) flips to nudge (~240px), the hint bubble's first measurement
+  // happens while the iframe is still mascot-width, gets wrapped to fit that
+  // narrower box, and that cramped size is what gets reported — the iframe
+  // then "confirms" it's correctly sized for content that's actually being
+  // squeezed. Reserving nudge-sized room even while showing the mascot means
+  // there's always enough width for the bubble to lay out unconstrained.
+  const MIN_CLOSED_WIDTH = 260;
+  const MIN_CLOSED_HEIGHT = 300;
+
+  const sendResize = useCallback(() => {
+    if (!embedded) return;
+    if (open) {
+      window.parent.postMessage({ type: "waterbot:resize", state: "expanded" }, "*");
+      return;
+    }
+    const el = closedRef.current;
+    if (!el) return;
+    window.parent.postMessage(
+      {
+        type: "waterbot:resize",
+        state: widgetState,
+        width: Math.max(el.offsetWidth, MIN_CLOSED_WIDTH),
+        height: Math.max(el.offsetHeight, MIN_CLOSED_HEIGHT),
+      },
+      "*"
+    );
+  }, [embedded, open, widgetState]);
+
+  useLayoutEffect(() => {
+    sendResize();
+  }, [sendResize]);
+
+  useEffect(() => {
+    if (!embedded || open) return;
+    const el = closedRef.current;
+    if (!el) return;
+    const observer = new ResizeObserver(() => sendResize());
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [embedded, open, sendResize]);
+
+  useEffect(() => {
+    if (!embedded) return;
+    const onMessage = (event: MessageEvent) => {
+      if (event.data?.type === "waterbot:query-state") sendResize();
+    };
+    window.addEventListener("message", onMessage);
+    return () => window.removeEventListener("message", onMessage);
+  }, [embedded, sendResize]);
 
   return (
     <>
@@ -65,9 +136,25 @@ export function BlueChat({
         .blue-btn:hover .blue-bob { animation-play-state: paused; }
       `}</style>
 
-      {/* Floating mascot — hidden when panel is open */}
+      {/* Floating mascot — hidden when panel is open.
+          Embedded mode splits this into two layers: an outer box that fills
+          the iframe and anchors content to the bottom-right corner (so the
+          button doesn't jump as the iframe grows/shrinks), and an inner,
+          naturally-sized box (closedRef) whose offsetWidth/offsetHeight are
+          the widget's real, content-driven footprint — that's what gets
+          reported to the host so it can size the iframe to match exactly. */}
       {!open && (
-        <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-3">
+        <div
+          className={
+            embedded
+              ? "w-full h-full flex items-end justify-end"
+              : "fixed bottom-6 right-6 z-40 flex flex-col items-end gap-3"
+          }
+        >
+        <div
+          ref={embedded ? closedRef : undefined}
+          className={embedded ? "flex flex-col items-end gap-3 p-3" : "contents"}
+        >
 
           {/* Speech bubble hint */}
           {showHint && !hintDismissed && (
@@ -133,11 +220,18 @@ export function BlueChat({
             </div>
           </button>
         </div>
+        </div>
       )}
 
       {/* Chat panel — flush to bottom-right edge */}
       {open && (
-        <div className="fixed bottom-6 right-6 z-40 w-[380px] max-w-[calc(100vw-3rem)] h-[560px] max-h-[calc(100vh-4rem)] bwi-card overflow-hidden">
+        <div
+          className={
+            embedded
+              ? "w-full h-full bwi-card overflow-hidden"
+              : "fixed bottom-6 right-6 z-40 w-[380px] max-w-[calc(100vw-3rem)] h-[560px] max-h-[calc(100vh-4rem)] bwi-card overflow-hidden"
+          }
+        >
           <BlueChatPanel
             onLayersOn={onLayersOn}
             onFocusPlace={onFocusPlace}
