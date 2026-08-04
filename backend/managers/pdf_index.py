@@ -62,7 +62,16 @@ class PdfContentIndex:
                 pass  # fall through and re-fetch if the cache file is corrupt
 
         try:
-            resp = requests.get(url, timeout=20, headers={"User-Agent": "Mozilla/5.0"})
+            # Some institutional/government sites (e.g. usbr.gov) reject requests
+            # with only a bare User-Agent — a fuller, browser-like header set is
+            # needed or the connection gets dropped before any response.
+            headers = {
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                              "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+                "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                "Accept-Language": "en-US,en;q=0.9",
+            }
+            resp = requests.get(url, timeout=25, headers=headers)
             resp.raise_for_status()
             reader = PdfReader(io.BytesIO(resp.content))
             full_text = "\n\n".join(page.extract_text() or "" for page in reader.pages)

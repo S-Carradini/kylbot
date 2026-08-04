@@ -207,11 +207,11 @@
     "tags": "Colorado River, shortage, impact, entitlements, access, leasing, lease, cities"
   },
   {
-    "name": "Post-2026 Colorado River Operations Final EIS",
-    "type": "Web App",
+    "name": "Post-2026 Colorado River Operations Final EIS (Executive Summary)",
+    "type": "PDF",
     "description": "",
-    "link": "https://www.usbr.gov/ColoradoRiverBasin/post2026/final-eis/index.html",
-    "resource_description": "U.S. Bureau of Reclamation's Final Environmental Impact Statement on operational guidelines and strategies for Lake Powell and Lake Mead after 2026, covering water delivery, conservation, and management across the seven Colorado River Basin states and Mexico",
+    "link": "https://www.usbr.gov/ColoradoRiverBasin/post2026/final-eis/docs/ES/P26_FEIS_ExecSummary_508.pdf",
+    "resource_description": "Executive Summary of the U.S. Bureau of Reclamation's Final Environmental Impact Statement on operational guidelines and strategies for Lake Powell and Lake Mead after 2026, covering water delivery, conservation, and management across the seven Colorado River Basin states and Mexico. The full EIS has additional volumes and technical appendices at usbr.gov/ColoradoRiverBasin/post2026/final-eis/",
     "topics": "Colorado River, post-2026 guidelines, Lake Powell, Lake Mead, reservoir operations",
     "tags": "Colorado River, post-2026, Lake Powell, Lake Mead, Bureau of Reclamation, EIS, operations, guidelines"
   },
