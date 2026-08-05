@@ -439,5 +439,455 @@
     "resource_description": "",
     "topics": "",
     "tags": ""
+  },
+  {
+    "name": "Post-2026 Colorado River EIS: Dear Reader Letter",
+    "type": "PDF",
+    "description": "",
+    "link": "https://www.usbr.gov/ColoradoRiverBasin/post2026/final-eis/docs/DearReader/P26_FEIS_DearReader_508.pdf",
+    "resource_description": "Part of the U.S. Bureau of Reclamation's Post-2026 Colorado River Operations Final EIS, covering: introduction, overview",
+    "topics": "Colorado River, post-2026, introduction, overview",
+    "tags": "Colorado River, post-2026, EIS, Bureau of Reclamation, introduction, overview"
+  },
+  {
+    "name": "Post-2026 Colorado River EIS: Cover, Abstract, Table of Contents, and Acronyms (Vol. I)",
+    "type": "PDF",
+    "description": "",
+    "link": "https://www.usbr.gov/ColoradoRiverBasin/post2026/final-eis/docs/Vol-I/P26_FEIS_CoverAbstractContents_VolI_508.pdf",
+    "resource_description": "Part of the U.S. Bureau of Reclamation's Post-2026 Colorado River Operations Final EIS, covering: abstract, acronyms, table of contents",
+    "topics": "Colorado River, post-2026, abstract, acronyms, table of contents",
+    "tags": "Colorado River, post-2026, EIS, Bureau of Reclamation, abstract, acronyms, table of contents"
+  },
+  {
+    "name": "Post-2026 Colorado River EIS: Chapter 1 - Purpose and Need",
+    "type": "PDF",
+    "description": "",
+    "link": "https://www.usbr.gov/ColoradoRiverBasin/post2026/final-eis/docs/Vol-I/P26-FEIS_1_Ch1_PurposeNeed_508.pdf",
+    "resource_description": "Part of the U.S. Bureau of Reclamation's Post-2026 Colorado River Operations Final EIS, covering: purpose, need, background",
+    "topics": "Colorado River, post-2026, purpose, need, background",
+    "tags": "Colorado River, post-2026, EIS, Bureau of Reclamation, purpose, need, background"
+  },
+  {
+    "name": "Post-2026 Colorado River EIS: Chapter 2 - Description of Alternatives",
+    "type": "PDF",
+    "description": "",
+    "link": "https://www.usbr.gov/ColoradoRiverBasin/post2026/final-eis/docs/Vol-I/P26-FEIS_2_Ch2_Alternatives_508.pdf",
+    "resource_description": "Part of the U.S. Bureau of Reclamation's Post-2026 Colorado River Operations Final EIS, covering: alternatives, operating strategies, proposed action",
+    "topics": "Colorado River, post-2026, alternatives, operating strategies, proposed action",
+    "tags": "Colorado River, post-2026, EIS, Bureau of Reclamation, alternatives, operating strategies, proposed action"
+  },
+  {
+    "name": "Post-2026 Colorado River EIS: Chapter 3 - Affected Environment and Environmental Consequences",
+    "type": "PDF",
+    "description": "",
+    "link": "https://www.usbr.gov/ColoradoRiverBasin/post2026/final-eis/docs/Vol-I/P26-FEIS_3_Ch3_AE-EC_508.pdf",
+    "resource_description": "Part of the U.S. Bureau of Reclamation's Post-2026 Colorado River Operations Final EIS, covering: affected environment, environmental consequences, impacts",
+    "topics": "Colorado River, post-2026, affected environment, environmental consequences, impacts",
+    "tags": "Colorado River, post-2026, EIS, Bureau of Reclamation, affected environment, environmental consequences, impacts"
+  },
+  {
+    "name": "Post-2026 Colorado River EIS: Chapter 4 - Consultation and Coordination",
+    "type": "PDF",
+    "description": "",
+    "link": "https://www.usbr.gov/ColoradoRiverBasin/post2026/final-eis/docs/Vol-I/P26-FEIS_4_Ch4_ConsultCoord_508.pdf",
+    "resource_description": "Part of the U.S. Bureau of Reclamation's Post-2026 Colorado River Operations Final EIS, covering: consultation, coordination, tribes, agencies",
+    "topics": "Colorado River, post-2026, consultation, coordination, tribes, agencies",
+    "tags": "Colorado River, post-2026, EIS, Bureau of Reclamation, consultation, coordination, tribes, agencies"
+  },
+  {
+    "name": "Post-2026 Colorado River EIS: Cover, Table of Contents (Vol. II Appendices)",
+    "type": "PDF",
+    "description": "",
+    "link": "https://www.usbr.gov/ColoradoRiverBasin/post2026/final-eis/docs/Vol-II/P26_FEIS_CoverContents_VolII_508.pdf",
+    "resource_description": "Part of the U.S. Bureau of Reclamation's Post-2026 Colorado River Operations Final EIS, covering: table of contents",
+    "topics": "Colorado River, post-2026, table of contents",
+    "tags": "Colorado River, post-2026, EIS, Bureau of Reclamation, table of contents"
+  },
+  {
+    "name": "Post-2026 Colorado River EIS: Appendix A - CRSS Model Documentation",
+    "type": "PDF",
+    "description": "",
+    "link": "https://www.usbr.gov/ColoradoRiverBasin/post2026/final-eis/docs/Vol-II/P26-FEIS_Appendix_A_CRSSModelingAssumptions_wAtts_508.pdf",
+    "resource_description": "Part of the U.S. Bureau of Reclamation's Post-2026 Colorado River Operations Final EIS, covering: CRSS model, modeling documentation",
+    "topics": "Colorado River, post-2026, CRSS model, modeling documentation",
+    "tags": "Colorado River, post-2026, EIS, Bureau of Reclamation, CRSS model, modeling documentation"
+  },
+  {
+    "name": "Post-2026 Colorado River EIS: Appendix B - Modeling Assumptions for Lake Powell and Lake Mead Storage and Delivery of Conserved Water",
+    "type": "PDF",
+    "description": "",
+    "link": "https://www.usbr.gov/ColoradoRiverBasin/post2026/final-eis/docs/Vol-II/P26-FEIS_Appendix_B_ModelingAssumptionsLakePowellLakeMead_508.pdf",
+    "resource_description": "Part of the U.S. Bureau of Reclamation's Post-2026 Colorado River Operations Final EIS, covering: Lake Powell, Lake Mead, modeling assumptions, conserved water",
+    "topics": "Colorado River, post-2026, Lake Powell, Lake Mead, modeling assumptions, conserved water",
+    "tags": "Colorado River, post-2026, EIS, Bureau of Reclamation, Lake Powell, Lake Mead, modeling assumptions, conserved water"
+  },
+  {
+    "name": "Post-2026 Colorado River EIS: Appendix C - Shortage Allocation Model and Alternative Distribution Model Documentation",
+    "type": "PDF",
+    "description": "",
+    "link": "https://www.usbr.gov/ColoradoRiverBasin/post2026/final-eis/docs/Vol-II/P26-FEIS_Appendix_C_ShortageAllocationModel_wAtts_508.pdf.pdf",
+    "resource_description": "Part of the U.S. Bureau of Reclamation's Post-2026 Colorado River Operations Final EIS, covering: shortage allocation, distribution model",
+    "topics": "Colorado River, post-2026, shortage allocation, distribution model",
+    "tags": "Colorado River, post-2026, EIS, Bureau of Reclamation, shortage allocation, distribution model"
+  },
+  {
+    "name": "Post-2026 Colorado River EIS: Appendix D - Sensitivity Analysis of Natural Flow Percentage for the Supply Driven Alternative",
+    "type": "PDF",
+    "description": "",
+    "link": "https://www.usbr.gov/ColoradoRiverBasin/post2026/final-eis/docs/Vol-II/P26-FEIS_Appendix_D_SupplyDrivenSensitivity_508.pdf",
+    "resource_description": "Part of the U.S. Bureau of Reclamation's Post-2026 Colorado River Operations Final EIS, covering: sensitivity analysis, supply driven alternative",
+    "topics": "Colorado River, post-2026, sensitivity analysis, supply driven alternative",
+    "tags": "Colorado River, post-2026, EIS, Bureau of Reclamation, sensitivity analysis, supply driven alternative"
+  },
+  {
+    "name": "Post-2026 Colorado River EIS: Appendix E - DMDU Overview and Approach",
+    "type": "PDF",
+    "description": "",
+    "link": "https://www.usbr.gov/ColoradoRiverBasin/post2026/final-eis/docs/Vol-II/P26-FEIS_Appendix_E_DMDUOverviewApproach_508.pdf",
+    "resource_description": "Part of the U.S. Bureau of Reclamation's Post-2026 Colorado River Operations Final EIS, covering: DMDU, decision making under deep uncertainty",
+    "topics": "Colorado River, post-2026, DMDU, decision making under deep uncertainty",
+    "tags": "Colorado River, post-2026, EIS, Bureau of Reclamation, DMDU, decision making under deep uncertainty"
+  },
+  {
+    "name": "Post-2026 Colorado River EIS: Appendix F - Approach to Hydrologic Uncertainty",
+    "type": "PDF",
+    "description": "",
+    "link": "https://www.usbr.gov/ColoradoRiverBasin/post2026/final-eis/docs/Vol-II/P26-FEIS_Appendix_F_ HydrologicUncertaintySuperEnsemble_508.pdf",
+    "resource_description": "Part of the U.S. Bureau of Reclamation's Post-2026 Colorado River Operations Final EIS, covering: hydrologic uncertainty, super ensemble",
+    "topics": "Colorado River, post-2026, hydrologic uncertainty, super ensemble",
+    "tags": "Colorado River, post-2026, EIS, Bureau of Reclamation, hydrologic uncertainty, super ensemble"
+  },
+  {
+    "name": "Post-2026 Colorado River EIS: Appendix G - CRSS Initial Conditions",
+    "type": "PDF",
+    "description": "",
+    "link": "https://www.usbr.gov/ColoradoRiverBasin/post2026/final-eis/docs/Vol-II/P26-FEIS_Appendix_G_InitialConditions_508.pdf",
+    "resource_description": "Part of the U.S. Bureau of Reclamation's Post-2026 Colorado River Operations Final EIS, covering: CRSS, initial conditions",
+    "topics": "Colorado River, post-2026, CRSS, initial conditions",
+    "tags": "Colorado River, post-2026, EIS, Bureau of Reclamation, CRSS, initial conditions"
+  },
+  {
+    "name": "Post-2026 Colorado River EIS: Appendix H - Sensitivity Analysis of Demand Schedule Assumptions on Unused Tribal Water Available for Storage",
+    "type": "PDF",
+    "description": "",
+    "link": "https://www.usbr.gov/ColoradoRiverBasin/post2026/final-eis/docs/Vol-II/P26-FEIS_Appendix_H_UnusedTribalDemand_508.pdf",
+    "resource_description": "Part of the U.S. Bureau of Reclamation's Post-2026 Colorado River Operations Final EIS, covering: tribal water, sensitivity analysis, storage",
+    "topics": "Colorado River, post-2026, tribal water, sensitivity analysis, storage",
+    "tags": "Colorado River, post-2026, EIS, Bureau of Reclamation, tribal water, sensitivity analysis, storage"
+  },
+  {
+    "name": "Post-2026 Colorado River EIS: Appendix I - Sensitivity Analysis of Alternate Upper Basin Demand Scenarios",
+    "type": "PDF",
+    "description": "",
+    "link": "https://www.usbr.gov/ColoradoRiverBasin/post2026/final-eis/docs/Vol-II/P26-FEIS_Appendix_I_AlternateUpperBasinDemandScenarios_508.pdf",
+    "resource_description": "Part of the U.S. Bureau of Reclamation's Post-2026 Colorado River Operations Final EIS, covering: Upper Basin, demand scenarios",
+    "topics": "Colorado River, post-2026, Upper Basin, demand scenarios",
+    "tags": "Colorado River, post-2026, EIS, Bureau of Reclamation, Upper Basin, demand scenarios"
+  },
+  {
+    "name": "Post-2026 Colorado River EIS: Appendix J - Sensitivity Analysis of Assumed Parameter Values on 602(a) Storage",
+    "type": "PDF",
+    "description": "",
+    "link": "https://www.usbr.gov/ColoradoRiverBasin/post2026/final-eis/docs/Vol-II/P26-FEIS_Appendix_J_602aAnalysis_508.pdf",
+    "resource_description": "Part of the U.S. Bureau of Reclamation's Post-2026 Colorado River Operations Final EIS, covering: 602(a) storage, sensitivity analysis",
+    "topics": "Colorado River, post-2026, 602(a) storage, sensitivity analysis",
+    "tags": "Colorado River, post-2026, EIS, Bureau of Reclamation, 602(a) storage, sensitivity analysis"
+  },
+  {
+    "name": "Post-2026 Colorado River EIS: Appendix K - Sensitivity Analysis of Modeling Assumptions for Future Water Deliveries to Mexico",
+    "type": "PDF",
+    "description": "",
+    "link": "https://www.usbr.gov/ColoradoRiverBasin/post2026/final-eis/docs/Vol-II/P26-FEIS_Appendix_K MexicoShortageSensitivtyAnalysis_508.pdf",
+    "resource_description": "Part of the U.S. Bureau of Reclamation's Post-2026 Colorado River Operations Final EIS, covering: Mexico, water deliveries, shortage sensitivity",
+    "topics": "Colorado River, post-2026, Mexico, water deliveries, shortage sensitivity",
+    "tags": "Colorado River, post-2026, EIS, Bureau of Reclamation, Mexico, water deliveries, shortage sensitivity"
+  },
+  {
+    "name": "Post-2026 Colorado River EIS: Appendix L - Upper Basin States Depletion Schedules",
+    "type": "PDF",
+    "description": "",
+    "link": "https://www.usbr.gov/ColoradoRiverBasin/post2026/final-eis/docs/Vol-II/P26-FEIS_Appendix_L_UpperBasinBaselineDemandSchedule_508.pdf",
+    "resource_description": "Part of the U.S. Bureau of Reclamation's Post-2026 Colorado River Operations Final EIS, covering: Upper Basin, depletion schedule",
+    "topics": "Colorado River, post-2026, Upper Basin, depletion schedule",
+    "tags": "Colorado River, post-2026, EIS, Bureau of Reclamation, Upper Basin, depletion schedule"
+  },
+  {
+    "name": "Post-2026 Colorado River EIS: Appendix M - Lower Division States Depletion Schedules",
+    "type": "PDF",
+    "description": "",
+    "link": "https://www.usbr.gov/ColoradoRiverBasin/post2026/final-eis/docs/Vol-II/P26-FEIS_Appendix_M_LowerBasinBaselineDemandSchedule_508.pdf",
+    "resource_description": "Part of the U.S. Bureau of Reclamation's Post-2026 Colorado River Operations Final EIS, covering: Lower Basin, depletion schedule",
+    "topics": "Colorado River, post-2026, Lower Basin, depletion schedule",
+    "tags": "Colorado River, post-2026, EIS, Bureau of Reclamation, Lower Basin, depletion schedule"
+  },
+  {
+    "name": "Post-2026 Colorado River EIS: Appendix N - International Border Region of the Colorado River",
+    "type": "PDF",
+    "description": "",
+    "link": "https://www.usbr.gov/ColoradoRiverBasin/post2026/final-eis/docs/Vol-II/P26-FEIS_Appendix_N_InternationalBorderRegion_508.pdf",
+    "resource_description": "Part of the U.S. Bureau of Reclamation's Post-2026 Colorado River Operations Final EIS, covering: Mexico, international border, Colorado River",
+    "topics": "Colorado River, post-2026, Mexico, international border, Colorado River",
+    "tags": "Colorado River, post-2026, EIS, Bureau of Reclamation, Mexico, international border, Colorado River"
+  },
+  {
+    "name": "Post-2026 Colorado River EIS: Appendix O - Analysis of Lake Powell Infrastructure Protection Releases",
+    "type": "PDF",
+    "description": "",
+    "link": "https://www.usbr.gov/ColoradoRiverBasin/post2026/final-eis/docs/Vol-II/P26-FEIS_Appendix_O_PIPAppendix_508.pdf",
+    "resource_description": "Part of the U.S. Bureau of Reclamation's Post-2026 Colorado River Operations Final EIS, covering: Lake Powell, infrastructure protection releases",
+    "topics": "Colorado River, post-2026, Lake Powell, infrastructure protection releases",
+    "tags": "Colorado River, post-2026, EIS, Bureau of Reclamation, Lake Powell, infrastructure protection releases"
+  },
+  {
+    "name": "Post-2026 Colorado River EIS: Appendix P - Tribal Consultation and Coordination Efforts",
+    "type": "PDF",
+    "description": "",
+    "link": "https://www.usbr.gov/ColoradoRiverBasin/post2026/final-eis/docs/Vol-II/P26-FEIS_Appendix_P_TribalConsultationEfforts_508.pdf",
+    "resource_description": "Part of the U.S. Bureau of Reclamation's Post-2026 Colorado River Operations Final EIS, covering: tribal consultation, coordination",
+    "topics": "Colorado River, post-2026, tribal consultation, coordination",
+    "tags": "Colorado River, post-2026, EIS, Bureau of Reclamation, tribal consultation, coordination"
+  },
+  {
+    "name": "Post-2026 Colorado River EIS: Appendix Q - Federal Register Notices",
+    "type": "PDF",
+    "description": "",
+    "link": "https://www.usbr.gov/ColoradoRiverBasin/post2026/final-eis/docs/Vol-II/P26-FEIS_Appendix_Q_FederalRegisterNotices_508.pdf",
+    "resource_description": "Part of the U.S. Bureau of Reclamation's Post-2026 Colorado River Operations Final EIS, covering: Federal Register, notices",
+    "topics": "Colorado River, post-2026, Federal Register, notices",
+    "tags": "Colorado River, post-2026, EIS, Bureau of Reclamation, Federal Register, notices"
+  },
+  {
+    "name": "Post-2026 Colorado River EIS: Appendix R - Response to Public Comment",
+    "type": "PDF",
+    "description": "",
+    "link": "https://www.usbr.gov/ColoradoRiverBasin/post2026/final-eis/docs/Vol-II/P26-FEIS_Appendix_R_ResponsetoPublicComments_508.pdf",
+    "resource_description": "Part of the U.S. Bureau of Reclamation's Post-2026 Colorado River Operations Final EIS, covering: public comment, response",
+    "topics": "Colorado River, post-2026, public comment, response",
+    "tags": "Colorado River, post-2026, EIS, Bureau of Reclamation, public comment, response"
+  },
+  {
+    "name": "Post-2026 Colorado River EIS: Appendix S - Additional Description of Alternatives",
+    "type": "PDF",
+    "description": "",
+    "link": "https://www.usbr.gov/ColoradoRiverBasin/post2026/final-eis/docs/Vol-II/P26-FEIS_Appendix_S_AdditionalDescriptionAlternatives_508.pdf",
+    "resource_description": "Part of the U.S. Bureau of Reclamation's Post-2026 Colorado River Operations Final EIS, covering: alternatives, additional description",
+    "topics": "Colorado River, post-2026, alternatives, additional description",
+    "tags": "Colorado River, post-2026, EIS, Bureau of Reclamation, alternatives, additional description"
+  },
+  {
+    "name": "Post-2026 Colorado River EIS: Appendix T - Preliminary Description and Analysis of Anticipated Operating Guidelines for 2027 and 2028",
+    "type": "PDF",
+    "description": "",
+    "link": "https://www.usbr.gov/ColoradoRiverBasin/post2026/final-eis/docs/Vol-II/P26-FEIS_Appendix_T_2YearAnalysis_wAtts_508.pdf",
+    "resource_description": "Part of the U.S. Bureau of Reclamation's Post-2026 Colorado River Operations Final EIS, covering: 2027, 2028, operating guidelines",
+    "topics": "Colorado River, post-2026, 2027, 2028, operating guidelines",
+    "tags": "Colorado River, post-2026, EIS, Bureau of Reclamation, 2027, 2028, operating guidelines"
+  },
+  {
+    "name": "Post-2026 Colorado River EIS: Cover, Table of Contents (Vol. III Technical Appendices)",
+    "type": "PDF",
+    "description": "",
+    "link": "https://www.usbr.gov/ColoradoRiverBasin/post2026/final-eis/docs/Vol-III/P26-FEIS_CoverContents_VolIII_508.pdf",
+    "resource_description": "Part of the U.S. Bureau of Reclamation's Post-2026 Colorado River Operations Final EIS, covering: table of contents",
+    "topics": "Colorado River, post-2026, table of contents",
+    "tags": "Colorado River, post-2026, EIS, Bureau of Reclamation, table of contents"
+  },
+  {
+    "name": "Post-2026 Colorado River EIS: TA-3 - Hydrologic Resources",
+    "type": "PDF",
+    "description": "",
+    "link": "https://www.usbr.gov/ColoradoRiverBasin/post2026/final-eis/docs/Vol-III/P26-FEIS_TA_03_Hydro_508.pdf",
+    "resource_description": "Part of the U.S. Bureau of Reclamation's Post-2026 Colorado River Operations Final EIS, covering: hydrologic resources",
+    "topics": "Colorado River, post-2026, hydrologic resources",
+    "tags": "Colorado River, post-2026, EIS, Bureau of Reclamation, hydrologic resources"
+  },
+  {
+    "name": "Post-2026 Colorado River EIS: TA-4 - Water Deliveries",
+    "type": "PDF",
+    "description": "",
+    "link": "https://www.usbr.gov/ColoradoRiverBasin/post2026/final-eis/docs/Vol-III/P26-FEIS_TA_04_WaterDel_508.pdf",
+    "resource_description": "Part of the U.S. Bureau of Reclamation's Post-2026 Colorado River Operations Final EIS, covering: water deliveries",
+    "topics": "Colorado River, post-2026, water deliveries",
+    "tags": "Colorado River, post-2026, EIS, Bureau of Reclamation, water deliveries"
+  },
+  {
+    "name": "Post-2026 Colorado River EIS: TA-5 - Geomorphology and Sediment",
+    "type": "PDF",
+    "description": "",
+    "link": "https://www.usbr.gov/ColoradoRiverBasin/post2026/final-eis/docs/Vol-III/P26-FEIS_TA_05_GeoSedi_508.pdf",
+    "resource_description": "Part of the U.S. Bureau of Reclamation's Post-2026 Colorado River Operations Final EIS, covering: geomorphology, sediment",
+    "topics": "Colorado River, post-2026, geomorphology, sediment",
+    "tags": "Colorado River, post-2026, EIS, Bureau of Reclamation, geomorphology, sediment"
+  },
+  {
+    "name": "Post-2026 Colorado River EIS: TA-6 - Water Quality",
+    "type": "PDF",
+    "description": "",
+    "link": "https://www.usbr.gov/ColoradoRiverBasin/post2026/final-eis/docs/Vol-III/P26-FEIS_TA_06_WaterQual_508.pdf",
+    "resource_description": "Part of the U.S. Bureau of Reclamation's Post-2026 Colorado River Operations Final EIS, covering: water quality",
+    "topics": "Colorado River, post-2026, water quality",
+    "tags": "Colorado River, post-2026, EIS, Bureau of Reclamation, water quality"
+  },
+  {
+    "name": "Post-2026 Colorado River EIS: TA-7 - Air Quality",
+    "type": "PDF",
+    "description": "",
+    "link": "https://www.usbr.gov/ColoradoRiverBasin/post2026/final-eis/docs/Vol-III/P26-FEIS_TA_07_Air_508.pdf",
+    "resource_description": "Part of the U.S. Bureau of Reclamation's Post-2026 Colorado River Operations Final EIS, covering: air quality",
+    "topics": "Colorado River, post-2026, air quality",
+    "tags": "Colorado River, post-2026, EIS, Bureau of Reclamation, air quality"
+  },
+  {
+    "name": "Post-2026 Colorado River EIS: TA-8 - Biological Resources (Fish and Other Aquatic Species)",
+    "type": "PDF",
+    "description": "",
+    "link": "https://www.usbr.gov/ColoradoRiverBasin/post2026/final-eis/docs/Vol-III/P26-FEIS_TA_08_Aquatic_508.pdf",
+    "resource_description": "Part of the U.S. Bureau of Reclamation's Post-2026 Colorado River Operations Final EIS, covering: biological resources, fish, aquatic species",
+    "topics": "Colorado River, post-2026, biological resources, fish, aquatic species",
+    "tags": "Colorado River, post-2026, EIS, Bureau of Reclamation, biological resources, fish, aquatic species"
+  },
+  {
+    "name": "Post-2026 Colorado River EIS: TA-9 - Vegetation Including Special Status Species",
+    "type": "PDF",
+    "description": "",
+    "link": "https://www.usbr.gov/ColoradoRiverBasin/post2026/final-eis/docs/Vol-III/P26-FEIS_TA_09_Vegetation_508.pdf",
+    "resource_description": "Part of the U.S. Bureau of Reclamation's Post-2026 Colorado River Operations Final EIS, covering: vegetation, special status species",
+    "topics": "Colorado River, post-2026, vegetation, special status species",
+    "tags": "Colorado River, post-2026, EIS, Bureau of Reclamation, vegetation, special status species"
+  },
+  {
+    "name": "Post-2026 Colorado River EIS: TA-10 - Terrestrial Wildlife Including Special Status Species",
+    "type": "PDF",
+    "description": "",
+    "link": "https://www.usbr.gov/ColoradoRiverBasin/post2026/final-eis/docs/Vol-III/P26-FEIS_TA_10_Wildlife_508.pdf",
+    "resource_description": "Part of the U.S. Bureau of Reclamation's Post-2026 Colorado River Operations Final EIS, covering: terrestrial wildlife, special status species",
+    "topics": "Colorado River, post-2026, terrestrial wildlife, special status species",
+    "tags": "Colorado River, post-2026, EIS, Bureau of Reclamation, terrestrial wildlife, special status species"
+  },
+  {
+    "name": "Post-2026 Colorado River EIS: TA-11 - Cultural Resources",
+    "type": "PDF",
+    "description": "",
+    "link": "https://www.usbr.gov/ColoradoRiverBasin/post2026/final-eis/docs/Vol-III/P26-FEIS_TA_11_Cultural_508.pdf",
+    "resource_description": "Part of the U.S. Bureau of Reclamation's Post-2026 Colorado River Operations Final EIS, covering: cultural resources",
+    "topics": "Colorado River, post-2026, cultural resources",
+    "tags": "Colorado River, post-2026, EIS, Bureau of Reclamation, cultural resources"
+  },
+  {
+    "name": "Post-2026 Colorado River EIS: TA-12 - Paleontological Resources",
+    "type": "PDF",
+    "description": "",
+    "link": "https://www.usbr.gov/ColoradoRiverBasin/post2026/final-eis/docs/Vol-III/P26-FEIS_TA_12_Paleo_508.pdf",
+    "resource_description": "Part of the U.S. Bureau of Reclamation's Post-2026 Colorado River Operations Final EIS, covering: paleontological resources",
+    "topics": "Colorado River, post-2026, paleontological resources",
+    "tags": "Colorado River, post-2026, EIS, Bureau of Reclamation, paleontological resources"
+  },
+  {
+    "name": "Post-2026 Colorado River EIS: TA-13 - Tribal Resources",
+    "type": "PDF",
+    "description": "",
+    "link": "https://www.usbr.gov/ColoradoRiverBasin/post2026/final-eis/docs/Vol-III/P26-FEIS_TA_13_Tribal_508.pdf",
+    "resource_description": "Part of the U.S. Bureau of Reclamation's Post-2026 Colorado River Operations Final EIS, covering: tribal resources",
+    "topics": "Colorado River, post-2026, tribal resources",
+    "tags": "Colorado River, post-2026, EIS, Bureau of Reclamation, tribal resources"
+  },
+  {
+    "name": "Post-2026 Colorado River EIS: TA-14 - Recreation",
+    "type": "PDF",
+    "description": "",
+    "link": "https://www.usbr.gov/ColoradoRiverBasin/post2026/final-eis/docs/Vol-III/P26-FEIS_TA_14_Rec_508.pdf",
+    "resource_description": "Part of the U.S. Bureau of Reclamation's Post-2026 Colorado River Operations Final EIS, covering: recreation",
+    "topics": "Colorado River, post-2026, recreation",
+    "tags": "Colorado River, post-2026, EIS, Bureau of Reclamation, recreation"
+  },
+  {
+    "name": "Post-2026 Colorado River EIS: TA-15 - Dams and Electrical Power Resources",
+    "type": "PDF",
+    "description": "",
+    "link": "https://www.usbr.gov/ColoradoRiverBasin/post2026/final-eis/docs/Vol-III/P26-FEIS_TA_15_Dams_508.pdf",
+    "resource_description": "Part of the U.S. Bureau of Reclamation's Post-2026 Colorado River Operations Final EIS, covering: dams, electrical power resources",
+    "topics": "Colorado River, post-2026, dams, electrical power resources",
+    "tags": "Colorado River, post-2026, EIS, Bureau of Reclamation, dams, electrical power resources"
+  },
+  {
+    "name": "Post-2026 Colorado River EIS: TA-16 - Socioeconomics",
+    "type": "PDF",
+    "description": "",
+    "link": "https://www.usbr.gov/ColoradoRiverBasin/post2026/final-eis/docs/Vol-III/P26-FEIS_TA_16_Socioeconomics_508.pdf",
+    "resource_description": "Part of the U.S. Bureau of Reclamation's Post-2026 Colorado River Operations Final EIS, covering: socioeconomics",
+    "topics": "Colorado River, post-2026, socioeconomics",
+    "tags": "Colorado River, post-2026, EIS, Bureau of Reclamation, socioeconomics"
+  },
+  {
+    "name": "Post-2026 Colorado River EIS: TA-17 - Population and Land Use",
+    "type": "PDF",
+    "description": "",
+    "link": "https://www.usbr.gov/ColoradoRiverBasin/post2026/final-eis/docs/Vol-III/P26-FEIS_TA_17_Lands_508.pdf",
+    "resource_description": "Part of the U.S. Bureau of Reclamation's Post-2026 Colorado River Operations Final EIS, covering: population, land use",
+    "topics": "Colorado River, post-2026, population, land use",
+    "tags": "Colorado River, post-2026, EIS, Bureau of Reclamation, population, land use"
+  },
+  {
+    "name": "Post-2026 Colorado River EIS: TA-18 - Indian Trust Assets",
+    "type": "PDF",
+    "description": "",
+    "link": "https://www.usbr.gov/ColoradoRiverBasin/post2026/final-eis/docs/Vol-III/P26-FEIS_TA_18_ITAs_508.pdf",
+    "resource_description": "Part of the U.S. Bureau of Reclamation's Post-2026 Colorado River Operations Final EIS, covering: Indian trust assets",
+    "topics": "Colorado River, post-2026, Indian trust assets",
+    "tags": "Colorado River, post-2026, EIS, Bureau of Reclamation, Indian trust assets"
+  },
+  {
+    "name": "Post-2026 Colorado River EIS: TA-19 - Visual Resources",
+    "type": "PDF",
+    "description": "",
+    "link": "https://www.usbr.gov/ColoradoRiverBasin/post2026/final-eis/docs/Vol-III/P26-FEIS_TA_19_Visual_508.pdf",
+    "resource_description": "Part of the U.S. Bureau of Reclamation's Post-2026 Colorado River Operations Final EIS, covering: visual resources",
+    "topics": "Colorado River, post-2026, visual resources",
+    "tags": "Colorado River, post-2026, EIS, Bureau of Reclamation, visual resources"
+  },
+  {
+    "name": "Post-2026 Colorado River EIS: Cover, Table of Contents (Vol. IV)",
+    "type": "PDF",
+    "description": "",
+    "link": "https://www.usbr.gov/ColoradoRiverBasin/post2026/final-eis/docs/Vol-IV/P26_FEIS_CoverContents_VolIV_508.pdf",
+    "resource_description": "Part of the U.S. Bureau of Reclamation's Post-2026 Colorado River Operations Final EIS, covering: table of contents",
+    "topics": "Colorado River, post-2026, table of contents",
+    "tags": "Colorado River, post-2026, EIS, Bureau of Reclamation, table of contents"
+  },
+  {
+    "name": "Post-2026 Colorado River EIS: List of Preparers",
+    "type": "PDF",
+    "description": "",
+    "link": "https://www.usbr.gov/ColoradoRiverBasin/post2026/final-eis/docs/Vol-IV/P26-FEIS_5_ListofPreparers_508.pdf",
+    "resource_description": "Part of the U.S. Bureau of Reclamation's Post-2026 Colorado River Operations Final EIS, covering: preparers",
+    "topics": "Colorado River, post-2026, preparers",
+    "tags": "Colorado River, post-2026, EIS, Bureau of Reclamation, preparers"
+  },
+  {
+    "name": "Post-2026 Colorado River EIS: References",
+    "type": "PDF",
+    "description": "",
+    "link": "https://www.usbr.gov/ColoradoRiverBasin/post2026/final-eis/docs/Vol-IV/P26-FEIS_6_References_508.pdf",
+    "resource_description": "Part of the U.S. Bureau of Reclamation's Post-2026 Colorado River Operations Final EIS, covering: references, citations",
+    "topics": "Colorado River, post-2026, references, citations",
+    "tags": "Colorado River, post-2026, EIS, Bureau of Reclamation, references, citations"
+  },
+  {
+    "name": "Post-2026 Colorado River EIS: Glossary",
+    "type": "PDF",
+    "description": "",
+    "link": "https://www.usbr.gov/ColoradoRiverBasin/post2026/final-eis/docs/Vol-IV/P26-FEIS_7_Glossary_508.pdf",
+    "resource_description": "Part of the U.S. Bureau of Reclamation's Post-2026 Colorado River Operations Final EIS, covering: glossary, definitions, terms",
+    "topics": "Colorado River, post-2026, glossary, definitions, terms",
+    "tags": "Colorado River, post-2026, EIS, Bureau of Reclamation, glossary, definitions, terms"
+  },
+  {
+    "name": "Post-2026 Colorado River EIS: Index",
+    "type": "PDF",
+    "description": "",
+    "link": "https://www.usbr.gov/ColoradoRiverBasin/post2026/final-eis/docs/Vol-IV/P26-FEIS_8_Index_508.pdf",
+    "resource_description": "Part of the U.S. Bureau of Reclamation's Post-2026 Colorado River Operations Final EIS, covering: index",
+    "topics": "Colorado River, post-2026, index",
+    "tags": "Colorado River, post-2026, EIS, Bureau of Reclamation, index"
   }
 ]
