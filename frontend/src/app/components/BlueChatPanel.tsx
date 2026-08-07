@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { Send, Layers, MapPin, BookOpen, X, RotateCcw, Copy, Check, Download } from "lucide-react";
+import { Send, Layers, MapPin, BookOpen, X, RotateCcw, Copy, Check, Download, Maximize2, Minimize2 } from "lucide-react";
 import { BlueMascot } from "./BlueMascot";
 import { AgentResponse, LayerKey, answerQuery } from "./data";
 import { AgentTrail } from "./AgentTrail";
@@ -88,6 +88,8 @@ export function BlueChatPanel({
   onClose,
   closeTitle = "Close (keeps conversation)",
   fullScreen = false,
+  expanded,
+  onToggleExpand,
 }: {
   onLayersOn: (l: LayerKey[]) => void;
   onFocusPlace: (id?: string) => void;
@@ -96,6 +98,12 @@ export function BlueChatPanel({
   closeTitle?: string;
   /** Widens the inner content to a centered reading column instead of the narrow docked-widget layout. */
   fullScreen?: boolean;
+  /** Current enlarge state of the docked floating widget. Omit (along with
+   *  onToggleExpand) to hide the enlarge toggle entirely — used for the
+   *  full-page /chat and embedded /widget modes, which are already sized by
+   *  their context and have no "enlarge" concept of their own. */
+  expanded?: boolean;
+  onToggleExpand?: () => void;
 }) {
   const [confirmRestart, setConfirmRestart] = useState(false);
   const [copiedId, setCopiedId] = useState<number | null>(null);
@@ -247,6 +255,15 @@ export function BlueChatPanel({
           >
             <Download className="w-4 h-4" />
           </button>
+          {onToggleExpand && (
+            <button
+              onClick={onToggleExpand}
+              className="text-white/70 hover:text-white transition p-1 rounded-lg hover:bg-white/10"
+              title={expanded ? "Shrink panel" : "Expand panel"}
+            >
+              {expanded ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
+            </button>
+          )}
           <button
             onClick={() => { setConfirmRestart(true); }}
             className="text-white/70 hover:text-white transition p-1 rounded-lg hover:bg-white/10"
@@ -417,6 +434,9 @@ export function BlueChatPanel({
               <Send className="w-4 h-4" />
             </button>
           </form>
+          <div className="px-4 pb-2.5 text-center text-[10px] text-[color:var(--color-slate-navy)]/45 leading-snug">
+            Blue is AI and can make mistakes. Please double check important information.
+          </div>
         </div>
       </div>
     </div>

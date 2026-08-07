@@ -22,6 +22,12 @@ export function BlueChat({
   const [open, setOpen] = useState(false);
   const [showHint, setShowHint] = useState(false);
   const [hintDismissed, setHintDismissed] = useState(false);
+  // Lets the user enlarge the docked floating panel to read long answers more
+  // comfortably. Only meaningful for the non-embedded floating-widget case —
+  // the full-page /chat route and the embedded /widget iframe are already
+  // sized by their context, so BlueChatPanel hides the toggle when this
+  // isn't wired up (see WidgetPage/ChatPage, which don't pass it through).
+  const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
     if (open || hintDismissed) return;
@@ -226,10 +232,17 @@ export function BlueChat({
       {/* Chat panel — flush to bottom-right edge */}
       {open && (
         <div
-          className={
+          className={embedded ? "w-full h-full bwi-card overflow-hidden" : "fixed bottom-6 right-6 z-40 bwi-card overflow-hidden"}
+          style={
             embedded
-              ? "w-full h-full bwi-card overflow-hidden"
-              : "fixed bottom-6 right-6 z-40 w-[380px] max-w-[calc(100vw-3rem)] h-[560px] max-h-[calc(100vh-4rem)] bwi-card overflow-hidden"
+              ? undefined
+              : {
+                  width: expanded ? 580 : 380,
+                  height: expanded ? "calc(100vh - 3rem)" : 560,
+                  maxWidth: "calc(100vw - 3rem)",
+                  maxHeight: "calc(100vh - 3rem)",
+                  transition: "width 0.25s ease, height 0.25s ease",
+                }
           }
         >
           <BlueChatPanel
@@ -237,6 +250,7 @@ export function BlueChat({
             onFocusPlace={onFocusPlace}
             onOpenMap={onOpenMap}
             onClose={() => setOpen(false)}
+            {...(!embedded ? { expanded, onToggleExpand: () => setExpanded((v) => !v) } : {})}
           />
         </div>
       )}
