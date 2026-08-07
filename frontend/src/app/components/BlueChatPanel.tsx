@@ -23,6 +23,24 @@ function isGroundwaterTopic(topic?: string): boolean {
   return topic === "Groundwater" || topic === "Trends";
 }
 
+// Some real questions are substantively about groundwater without using the
+// word "groundwater" or "aquifer" themselves (e.g. "Is the water table
+// dropping in Buckeye?") — the local topic guesser above only looks at the
+// question text, so it misses these. As a second check, we also look at the
+// AI's actual answer: if it mentions "groundwater"/"aquifer" many times
+// (not just once or twice in passing, which is normal even for AMA/Security/
+// Colorado River answers), treat it as a groundwater topic too. Threshold of
+// 6 is chosen from real testing: AMA/Security answers scored 1-2 mentions,
+// Colorado River scored up to 5, genuine groundwater answers scored 8+ — 6
+// sits with a safety margin above the highest non-groundwater score seen.
+const GROUNDWATER_MENTION_THRESHOLD = 6;
+
+function isAnswerGroundwaterDominant(text: string): boolean {
+  const lower = text.toLowerCase();
+  const count = (lower.match(/groundwater|aquifer/g) || []).length;
+  return count >= GROUNDWATER_MENTION_THRESHOLD;
+}
+
 const GREETING_WORDS = new Set([
   "hi", "hello", "hey", "yo", "hiya", "howdy", "sup", "hola",
   "good morning", "good afternoon", "good evening", "greetings",
@@ -175,6 +193,10 @@ export function BlueChatPanel({
     }
 
     const greeting = isGreetingOnly(q);
+    // Even if the question itself didn't signal a groundwater topic, the real
+    // answer might turn out to be dominantly about groundwater — in that case
+    // still route "View on map" to the groundwater map/dashboard.
+    const answerTopic = !failed && isAnswerGroundwaterDominant(text) ? "Groundwater" : res.topic;
     const replyId = Date.now() + 1;
     setMsgs((m) => [
       ...m,
@@ -184,7 +206,7 @@ export function BlueChatPanel({
         text,
         bullets: failed || greeting ? undefined : res.bullets,
         trail: failed || greeting ? undefined : res.trail,
-        topic: failed || greeting ? undefined : res.topic,
+        topic: failed || greeting ? undefined : answerTopic,
         isGreetingReply: greeting,
       },
     ]);
@@ -217,12 +239,6 @@ export function BlueChatPanel({
           <div className="flex-1">
             <div className="font-display text-sm font-semibold">Blue · Arizona Water Blueprint</div>
             <div className="text-[11px] text-white/70">Kyl Center for Water Policy</div>
-          </div>
-          <div
-            className="text-[10px] text-white/60 shrink-0 max-w-[120px] text-right leading-tight"
-            title="Blue is AI and can make mistakes. Please double check."
-          >
-            Blue is AI and can make mistakes. Please double check.
           </div>
           <button
             onClick={downloadTranscript}
