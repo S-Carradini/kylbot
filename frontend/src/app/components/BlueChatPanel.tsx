@@ -218,6 +218,12 @@ export function BlueChatPanel({
             <div className="font-display text-sm font-semibold">Blue · Arizona Water Blueprint</div>
             <div className="text-[11px] text-white/70">Kyl Center for Water Policy</div>
           </div>
+          <div
+            className="text-[10px] text-white/60 shrink-0 max-w-[120px] text-right leading-tight"
+            title="Blue is AI and can make mistakes. Please double check."
+          >
+            Blue is AI and can make mistakes. Please double check.
+          </div>
           <button
             onClick={downloadTranscript}
             className="text-white/70 hover:text-white transition p-1 rounded-lg hover:bg-white/10"
