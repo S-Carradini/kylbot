@@ -22,11 +22,12 @@ export function BlueChat({
   const [open, setOpen] = useState(false);
   const [showHint, setShowHint] = useState(false);
   const [hintDismissed, setHintDismissed] = useState(false);
-  // Lets the user enlarge the docked floating panel to read long answers more
-  // comfortably. Only meaningful for the non-embedded floating-widget case —
-  // the full-page /chat route and the embedded /widget iframe are already
-  // sized by their context, so BlueChatPanel hides the toggle when this
-  // isn't wired up (see WidgetPage/ChatPage, which don't pass it through).
+  // Lets the user enlarge the docked panel to read long answers more
+  // comfortably. Meaningful for both the non-embedded floating widget (CSS
+  // grows the panel directly) and the embedded /widget iframe (the "enlarged"
+  // resize state below tells the host to grow the iframe itself). The
+  // full-page /chat route is the only place this has no meaning — ChatPage
+  // doesn't pass expanded/onToggleExpand through, which hides the toggle.
   const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
@@ -62,7 +63,10 @@ export function BlueChat({
   const sendResize = useCallback(() => {
     if (!embedded) return;
     if (open) {
-      window.parent.postMessage({ type: "waterbot:resize", state: "expanded" }, "*");
+      window.parent.postMessage(
+        { type: "waterbot:resize", state: expanded ? "enlarged" : "expanded" },
+        "*"
+      );
       return;
     }
     const el = closedRef.current;
@@ -76,7 +80,7 @@ export function BlueChat({
       },
       "*"
     );
-  }, [embedded, open, widgetState]);
+  }, [embedded, open, expanded, widgetState]);
 
   useLayoutEffect(() => {
     sendResize();
@@ -250,7 +254,8 @@ export function BlueChat({
             onFocusPlace={onFocusPlace}
             onOpenMap={onOpenMap}
             onClose={() => setOpen(false)}
-            {...(!embedded ? { expanded, onToggleExpand: () => setExpanded((v) => !v) } : {})}
+            expanded={expanded}
+            onToggleExpand={() => setExpanded((v) => !v)}
           />
         </div>
       )}
