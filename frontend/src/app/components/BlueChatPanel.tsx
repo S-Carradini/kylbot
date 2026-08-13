@@ -111,11 +111,31 @@ export function BlueChatPanel({
 
   const contentWidth = fullScreen ? "max-w-3xl mx-auto w-full" : "";
 
-  const copyMsg = (m: Msg) => {
+  const copyMsg = async (m: Msg) => {
     const lines = [m.text, ...(m.bullets ?? [])].join("\n• ");
-    navigator.clipboard.writeText(lines);
-    setCopiedId(m.id);
-    setTimeout(() => setCopiedId(null), 1800);
+    let copied = false;
+    try {
+      await navigator.clipboard.writeText(lines);
+      copied = true;
+    } catch {
+      // Clipboard API blocked (e.g. Permissions Policy) — fall back to execCommand.
+      const textarea = document.createElement("textarea");
+      textarea.value = lines;
+      textarea.style.position = "fixed";
+      textarea.style.opacity = "0";
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        copied = document.execCommand("copy");
+      } catch {
+        copied = false;
+      }
+      document.body.removeChild(textarea);
+    }
+    if (copied) {
+      setCopiedId(m.id);
+      setTimeout(() => setCopiedId(null), 1800);
+    }
   };
 
   const downloadTranscript = () => {
@@ -130,7 +150,9 @@ export function BlueChatPanel({
     const a = document.createElement("a");
     a.href = url;
     a.download = "blue-chat-transcript.txt";
+    document.body.appendChild(a);
     a.click();
+    document.body.removeChild(a);
     URL.revokeObjectURL(url);
   };
 
