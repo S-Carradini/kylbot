@@ -10,12 +10,12 @@
       <meta name="robots" content="noindex, nofollow" />
       <style>html, body { height: 100%; margin: 0; } #root { height: 100%; }</style>
       <script>
-        // Applied synchronously, before first paint — the /widget route is
-        // loaded inside a transparent host iframe (see waterbot-embed.js) and
-        // must never show its own opaque background, not even for the brief
-        // moment before React mounts and the app's own effects would
-        // otherwise add this class.
-        if (location.pathname === "/widget") {
+        // Applied synchronously, before first paint — /widget and /map-widget
+        // are loaded inside a transparent host iframe (see waterbot-embed.js
+        // and map-waterbot-embed.js) and must never show their own opaque
+        // background, not even for the brief moment before React mounts and
+        // the app's own effects would otherwise add this class.
+        if (location.pathname === "/widget" || location.pathname === "/map-widget") {
           document.documentElement.classList.add("wb-widget-mode");
         }
       </script>

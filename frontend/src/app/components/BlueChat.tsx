@@ -22,11 +22,12 @@ export function BlueChat({
   const [open, setOpen] = useState(false);
   const [showHint, setShowHint] = useState(false);
   const [hintDismissed, setHintDismissed] = useState(false);
-  // Lets the user enlarge the docked floating panel to read long answers more
-  // comfortably. Only meaningful for the non-embedded floating-widget case —
-  // the full-page /chat route and the embedded /widget iframe are already
-  // sized by their context, so BlueChatPanel hides the toggle when this
-  // isn't wired up (see WidgetPage/ChatPage, which don't pass it through).
+  // Lets the user enlarge the docked panel to read long answers more
+  // comfortably. Meaningful for both the non-embedded floating widget (CSS
+  // grows the panel directly) and the embedded /widget iframe (the "enlarged"
+  // resize state below tells the host to grow the iframe itself). The
+  // full-page /chat route is the only place this has no meaning — ChatPage
+  // doesn't pass expanded/onToggleExpand through, which hides the toggle.
   const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
@@ -62,7 +63,10 @@ export function BlueChat({
   const sendResize = useCallback(() => {
     if (!embedded) return;
     if (open) {
-      window.parent.postMessage({ type: "waterbot:resize", state: "expanded" }, "*");
+      window.parent.postMessage(
+        { type: "waterbot:resize", state: expanded ? "enlarged" : "expanded" },
+        "*"
+      );
       return;
     }
     const el = closedRef.current;
@@ -76,7 +80,7 @@ export function BlueChat({
       },
       "*"
     );
-  }, [embedded, open, widgetState]);
+  }, [embedded, open, expanded, widgetState]);
 
   useLayoutEffect(() => {
     sendResize();
@@ -233,7 +237,10 @@ export function BlueChat({
           Kept mounted at all times (just hidden via display:none when closed)
           so BlueChatPanel's internal conversation state survives closing and
           reopening the widget — it should only reset when the user explicitly
-          clicks Restart, not just from closing/reopening. */}
+          clicks Restart, not just from closing/reopening. expanded/onToggleExpand
+          are passed through unconditionally (including embedded mode) since
+          sendResize above reports an "enlarged" state to the host iframe when
+          expanded is true. */}
       <div
         className={embedded ? "w-full h-full bwi-card overflow-hidden" : "fixed bottom-6 right-6 z-40 bwi-card overflow-hidden"}
         style={{
@@ -254,7 +261,8 @@ export function BlueChat({
           onFocusPlace={onFocusPlace}
           onOpenMap={onOpenMap}
           onClose={() => setOpen(false)}
-          {...(!embedded ? { expanded, onToggleExpand: () => setExpanded((v) => !v) } : {})}
+          expanded={expanded}
+          onToggleExpand={() => setExpanded((v) => !v)}
         />
       </div>
     </>

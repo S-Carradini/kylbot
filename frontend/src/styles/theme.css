@@ -137,8 +137,9 @@ html, body, #root {
   background: var(--color-cloud-white);
 }
 
-/* The /widget route renders inside a transparent host iframe (see
-   waterbot-embed.js) — it must not paint the app's opaque background.
+/* /widget and /map-widget render inside a transparent host iframe (see
+   waterbot-embed.js and map-waterbot-embed.js) — they must not paint the
+   app's opaque background.
    !important guards against Tailwind's `body { @apply bg-background }`
    base-layer rule, in case a future refactor moves this rule into a layer
    too (cascade layers are otherwise unordered relative to each other). */
