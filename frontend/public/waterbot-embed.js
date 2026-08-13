@@ -113,8 +113,11 @@
    *                      Safe when cross-origin: flag has no effect across origins.
    *   allow-popups       Enables window.open() for "View on map" and resource links.
    *   allow-forms        Enables the text input form inside the widget.
+   *   allow-downloads    Enables the "Download transcript" button (blob download).
    */
-  iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-popups allow-forms');
+  iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-popups allow-forms allow-downloads');
+  /* Permissions Policy: grants the "Copy" button access to navigator.clipboard.writeText(). */
+  iframe.setAttribute('allow', 'clipboard-write');
   iframe.setAttribute('allowtransparency', 'true');
 
   var initSize = getDimensions('mascot');
