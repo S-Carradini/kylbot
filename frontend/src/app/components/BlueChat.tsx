@@ -229,31 +229,34 @@ export function BlueChat({
         </div>
       )}
 
-      {/* Chat panel — flush to bottom-right edge */}
-      {open && (
-        <div
-          className={embedded ? "w-full h-full bwi-card overflow-hidden" : "fixed bottom-6 right-6 z-40 bwi-card overflow-hidden"}
-          style={
-            embedded
-              ? undefined
-              : {
-                  width: expanded ? 580 : 380,
-                  height: expanded ? "calc(100vh - 3rem)" : 560,
-                  maxWidth: "calc(100vw - 3rem)",
-                  maxHeight: "calc(100vh - 3rem)",
-                  transition: "width 0.25s ease, height 0.25s ease",
-                }
-          }
-        >
-          <BlueChatPanel
-            onLayersOn={onLayersOn}
-            onFocusPlace={onFocusPlace}
-            onOpenMap={onOpenMap}
-            onClose={() => setOpen(false)}
-            {...(!embedded ? { expanded, onToggleExpand: () => setExpanded((v) => !v) } : {})}
-          />
-        </div>
-      )}
+      {/* Chat panel — flush to bottom-right edge.
+          Kept mounted at all times (just hidden via display:none when closed)
+          so BlueChatPanel's internal conversation state survives closing and
+          reopening the widget — it should only reset when the user explicitly
+          clicks Restart, not just from closing/reopening. */}
+      <div
+        className={embedded ? "w-full h-full bwi-card overflow-hidden" : "fixed bottom-6 right-6 z-40 bwi-card overflow-hidden"}
+        style={{
+          display: open ? undefined : "none",
+          ...(embedded
+            ? undefined
+            : {
+                width: expanded ? 580 : 380,
+                height: expanded ? "calc(100vh - 3rem)" : 560,
+                maxWidth: "calc(100vw - 3rem)",
+                maxHeight: "calc(100vh - 3rem)",
+                transition: "width 0.25s ease, height 0.25s ease",
+              }),
+        }}
+      >
+        <BlueChatPanel
+          onLayersOn={onLayersOn}
+          onFocusPlace={onFocusPlace}
+          onOpenMap={onOpenMap}
+          onClose={() => setOpen(false)}
+          {...(!embedded ? { expanded, onToggleExpand: () => setExpanded((v) => !v) } : {})}
+        />
+      </div>
     </>
   );
 }
