@@ -156,8 +156,17 @@ export function BlueChatPanel({
     // "Relevant resources" links / "View on map" buttons once streaming ends.
     // A single consistent bottom-follow avoids the answer settling with its
     // last part (links, buttons) rendered below the fold.
+    //
+    // Guarded to only auto-scroll when already near the bottom — otherwise a
+    // user who has scrolled up to reread or click a link in an older message
+    // could get yanked back down mid-click (the link shifts under the cursor
+    // between mouse-down and mouse-up, so the browser treats it as a drag
+    // instead of a click, and the link silently fails to open).
     const container = ref.current;
     if (!container) return;
+    const distanceFromBottom = container.scrollHeight - container.scrollTop - container.clientHeight;
+    const NEAR_BOTTOM_THRESHOLD = 120;
+    if (distanceFromBottom > NEAR_BOTTOM_THRESHOLD) return;
     container.scrollTo({ top: container.scrollHeight, behavior: "smooth" });
   }, [msgs, isTyping, visibleWords, streamId]);
 
