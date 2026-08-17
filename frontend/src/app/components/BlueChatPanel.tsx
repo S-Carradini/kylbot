@@ -453,7 +453,11 @@ export function BlueChatPanel({
               <div className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}>
                 <button
                   onClick={() => copyMsg(m)}
-                  className="opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full border border-[color:var(--color-soft-gray)] bg-white text-[color:var(--color-slate-navy)]/60 hover:text-[color:var(--color-deep-water)] hover:border-[color:var(--color-cyan-glow)]"
+                  // Hidden-until-hover only makes sense on a real mouse — touch
+                  // devices have no persistent :hover state, so gating on
+                  // (hover: hover) keeps the button always visible/tappable on
+                  // mobile while preserving the decluttered desktop look.
+                  className="[@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-hover:opacity-100 transition-opacity flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full border border-[color:var(--color-soft-gray)] bg-white text-[color:var(--color-slate-navy)]/60 hover:text-[color:var(--color-deep-water)] hover:border-[color:var(--color-cyan-glow)]"
                   title="Copy to clipboard"
                 >
                   {copiedId === m.id
