@@ -171,6 +171,51 @@ export function BlueChatPanel({
   const [pendingId, setPendingId] = useState<number | null>(null);
   const [visibleWords, setVisibleWords] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
+  // Tracks whether the user has manually scrolled away from the bottom — once
+  // true, auto-scroll backs off entirely instead of re-fighting them on every
+  // new word (that constant re-snapping while streaming was the "rough"
+  // scrolling — smooth-scroll animations were restarting ~9x/sec and
+  // colliding with any manual scroll happening at the same moment). It resets
+  // to false (resume auto-follow) once the user scrolls back near the bottom
+  // themselves, or a fresh question is asked.
+  const userScrolledAwayRef = useRef(false);
+
+  useEffect(() => {
+    const container = ref.current;
+    if (!container) return;
+    const NEAR_BOTTOM_THRESHOLD = 40;
+    // The moment a wheel/touchmove event fires, the browser hasn't actually
+    // applied the scroll movement yet — checking distance-from-bottom right
+    // then can still read the old (near-bottom) position and miss that the
+    // user just started scrolling away, letting one more auto-snap sneak in
+    // and fight their gesture (this was the leftover "roughness"). So: any
+    // manual input at all immediately backs off auto-scroll, no distance
+    // check needed. Separately, a real "scroll" event (which fires *after*
+    // the position has actually updated) is used to notice when the user has
+    // manually returned near the bottom, to resume auto-follow.
+    const backOff = () => { userScrolledAwayRef.current = true; };
+    const checkResumed = () => {
+      const distanceFromBottom = container.scrollHeight - container.scrollTop - container.clientHeight;
+      if (distanceFromBottom <= NEAR_BOTTOM_THRESHOLD) userScrolledAwayRef.current = false;
+    };
+    // wheel/touchmove only ever fire from real user input, never from our own
+    // programmatic scrollTo() calls below — so this cleanly captures intent
+    // without needing to distinguish "who" caused a given scroll event.
+    container.addEventListener("wheel", backOff, { passive: true });
+    container.addEventListener("touchmove", backOff, { passive: true });
+    container.addEventListener("scroll", checkResumed, { passive: true });
+    return () => {
+      container.removeEventListener("wheel", backOff);
+      container.removeEventListener("touchmove", backOff);
+      container.removeEventListener("scroll", checkResumed);
+    };
+  }, []);
+
+  useEffect(() => {
+    // A fresh question (new user message) always resumes auto-follow, even
+    // if the user had scrolled away while reading something earlier.
+    if (msgs[msgs.length - 1]?.role === "user") userScrolledAwayRef.current = false;
+  }, [msgs]);
 
   useEffect(() => {
     // Keep following the bottom as new content appears — the new question,
@@ -178,18 +223,17 @@ export function BlueChatPanel({
     // "Relevant resources" links / "View on map" buttons once streaming ends.
     // A single consistent bottom-follow avoids the answer settling with its
     // last part (links, buttons) rendered below the fold.
-    //
-    // Guarded to only auto-scroll when already near the bottom — otherwise a
-    // user who has scrolled up to reread or click a link in an older message
-    // could get yanked back down mid-click (the link shifts under the cursor
-    // between mouse-down and mouse-up, so the browser treats it as a drag
-    // instead of a click, and the link silently fails to open).
     const container = ref.current;
     if (!container) return;
-    const distanceFromBottom = container.scrollHeight - container.scrollTop - container.clientHeight;
-    const NEAR_BOTTOM_THRESHOLD = 120;
-    if (distanceFromBottom > NEAR_BOTTOM_THRESHOLD) return;
-    container.scrollTo({ top: container.scrollHeight, behavior: "smooth" });
+    if (userScrolledAwayRef.current) return;
+    // "auto" (instant), not "smooth" (animated): a new word streams in ~9x/sec,
+    // so each jump is imperceptible on its own and it reads as continuous —
+    // but with "smooth", each jump kicks off its own ~300ms animation, and a
+    // mouse wheel scrolling *during* that animation has to fight it frame by
+    // frame, which is what was still causing roughness on wheel input
+    // specifically (keyboard scrolling cleanly cancels an in-progress
+    // animation instead of contesting it, which is why that felt fine).
+    container.scrollTo({ top: container.scrollHeight, behavior: "auto" });
   }, [msgs, isTyping, visibleWords, streamId]);
 
   useEffect(() => {
