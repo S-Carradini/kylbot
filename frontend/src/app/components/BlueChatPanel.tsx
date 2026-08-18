@@ -54,7 +54,7 @@ function isGreetingOnly(text: string): boolean {
 // Matches Markdown links [Name](url) first, then falls back to bare URLs.
 const LINK_PATTERN = /\[([^\]]+)\]\((https?:\/\/[^)]+)\)|(https?:\/\/[^\s)]+)/g;
 
-function linkify(text: string, linkClassName: string) {
+function linkify(text: string, linkClassName: string, onOpen: (url: string) => void) {
   const nodes: ReactNode[] = [];
   let lastIndex = 0;
   let key = 0;
@@ -69,7 +69,14 @@ function linkify(text: string, linkClassName: string) {
     const label = mdLabel ?? bareUrl;
     const href = mdUrl ?? bareUrl;
     nodes.push(
-      <a key={`u-${key++}`} href={href} target="_blank" rel="noopener noreferrer" className={linkClassName}>
+      <a
+        key={`u-${key++}`}
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={linkClassName}
+        onClick={(e) => { e.preventDefault(); onOpen(href); }}
+      >
         {label}
       </a>
     );
@@ -90,6 +97,7 @@ export function BlueChatPanel({
   fullScreen = false,
   expanded,
   onToggleExpand,
+  embedded = false,
 }: {
   onLayersOn: (l: LayerKey[]) => void;
   onFocusPlace: (id?: string) => void;
@@ -104,12 +112,33 @@ export function BlueChatPanel({
    *  their context and have no "enlarge" concept of their own. */
   expanded?: boolean;
   onToggleExpand?: () => void;
+  /** Rendered inside a cross-origin iframe (the /widget or /map-widget embeds).
+   *  When true, links relay through postMessage to the host page instead of
+   *  opening directly — a plain window.open()/<a target="_blank"> call made
+   *  from inside a third-party iframe gets flagged and silently canceled
+   *  (ERR_BLOCKED_BY_CLIENT) by some ad/content-blocker filter rules that key
+   *  off the request's initiator being cross-origin from the top-level page.
+   *  Right-click "open in new tab" bypasses this (Chrome handles it at the
+   *  browser-UI level, with no page-script initiator), which is what exposed
+   *  the gap — left-clicking failed while the context menu worked fine.
+   *  Relaying through the host's own script makes the resulting navigation's
+   *  initiator the top-level page itself, indistinguishable from a normal
+   *  same-page click. */
+  embedded?: boolean;
 }) {
   const [confirmRestart, setConfirmRestart] = useState(false);
   const [copiedId, setCopiedId] = useState<number | null>(null);
   const [input, setInput] = useState("");
 
   const contentWidth = fullScreen ? "max-w-3xl mx-auto w-full" : "";
+
+  const openLink = (url: string) => {
+    if (embedded) {
+      window.parent.postMessage({ type: "waterbot:open", url }, "*");
+    } else {
+      window.open(url, "_blank", "noopener,noreferrer");
+    }
+  };
 
   const copyMsg = async (m: Msg) => {
     const lines = [m.text, ...(m.bullets ?? [])].join("\n• ");
@@ -410,7 +439,8 @@ export function BlueChatPanel({
                     : m.text,
                   m.role === "user"
                     ? "underline underline-offset-2 text-white"
-                    : "underline underline-offset-2 text-[color:var(--color-deep-water)] hover:text-[color:var(--color-river-teal)]"
+                    : "underline underline-offset-2 text-[color:var(--color-deep-water)] hover:text-[color:var(--color-river-teal)]",
+                  openLink
                 )}
               </div>
               {m.bullets && m.id !== streamId && m.id !== pendingId && (
@@ -441,6 +471,7 @@ export function BlueChatPanel({
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-[11px] text-[color:var(--color-deep-water)] underline underline-offset-2 hover:text-[color:var(--color-river-teal)]"
+                      onClick={(e) => { e.preventDefault(); openLink(GROUNDWATER_DASHBOARD_URL); }}
                     >
                       View groundwater dashboard →
                     </a>
