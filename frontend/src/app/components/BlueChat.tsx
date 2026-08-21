@@ -263,6 +263,7 @@ export function BlueChat({
           onClose={() => setOpen(false)}
           expanded={expanded}
           onToggleExpand={() => setExpanded((v) => !v)}
+          embedded={embedded}
         />
       </div>
     </>

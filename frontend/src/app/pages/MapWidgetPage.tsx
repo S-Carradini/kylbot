@@ -79,6 +79,10 @@ export function MapWidgetPage() {
             rel="noopener noreferrer"
             className="flex items-center justify-center w-10 hover:bg-[color:var(--color-mist-blue)]/40 transition border-r border-[color:var(--color-soft-gray)]"
             title="Open the Arizona Water Blueprint"
+            onClick={(e) => {
+              e.preventDefault();
+              window.parent.postMessage({ type: "waterbot:open", url: window.location.origin }, "*");
+            }}
           >
             <Home className="w-4 h-4 text-[color:var(--color-deep-water)]" />
           </a>
@@ -101,9 +105,10 @@ export function MapWidgetPage() {
           <BlueChatPanel
             onLayersOn={() => {}}
             onFocusPlace={() => {}}
-            onOpenMap={(url) => window.open(url, "_blank", "noopener,noreferrer")}
+            onOpenMap={(url) => window.parent.postMessage({ type: "waterbot:open", url }, "*")}
             onClose={() => setOpen(false)}
             closeTitle="Hide chat panel"
+            embedded
           />
         </div>
       )}
