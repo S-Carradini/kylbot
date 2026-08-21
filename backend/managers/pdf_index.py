@@ -48,8 +48,8 @@ class PdfContentIndex:
         self.cache_dir = pathlib.Path(cache_dir)
         self.cache_dir.mkdir(parents=True, exist_ok=True)
 
-    def _cache_path(self, url: str) -> pathlib.Path:
-        key = hashlib.sha256(url.encode("utf-8")).hexdigest()[:24]
+    def _cache_path(self, cache_key: str) -> pathlib.Path:
+        key = hashlib.sha256(cache_key.encode("utf-8")).hexdigest()[:24]
         return self.cache_dir / f"{key}.json"
 
     def _get_chunks(self, url: str) -> list[str] | None:
@@ -84,16 +84,47 @@ class PdfContentIndex:
             json.dump({"url": url, "chunks": chunks}, f, ensure_ascii=False)
         return chunks
 
+    def _get_local_chunks(self, path: pathlib.Path) -> list[str] | None:
+        # For resources whose public link (e.g. an Issuu flipbook) isn't a
+        # fetchable PDF file — the actual PDF is bundled into the repo instead
+        # under backend/data/pdfs/ and read straight off disk, no network
+        # fetch involved. Still cached like the URL-fetched ones so repeated
+        # questions don't re-parse the file every time.
+        cache_path = self._cache_path(str(path))
+        if cache_path.exists():
+            try:
+                with open(cache_path, encoding="utf-8") as f:
+                    return json.load(f)["chunks"]
+            except Exception:
+                pass
+
+        try:
+            reader = PdfReader(path)
+            full_text = "\n\n".join(page.extract_text() or "" for page in reader.pages)
+        except Exception as e:
+            logging.warning("Could not parse local PDF %s: %s", path, e)
+            return None
+
+        chunks = _chunk_text(full_text)
+        with open(cache_path, "w", encoding="utf-8") as f:
+            json.dump({"path": str(path), "chunks": chunks}, f, ensure_ascii=False)
+        return chunks
+
     def get_excerpt(self, resource: dict, query: str, max_chars: int = 1200) -> str | None:
         """Returns the most relevant excerpt(s) from this PDF resource for the
         given query, or None if the resource isn't a PDF or couldn't be read."""
-        if resource.get("type") != "PDF":
+        local_pdf = resource.get("local_pdf")
+        if local_pdf:
+            # Relative to backend/ (this file lives in backend/managers/).
+            path = pathlib.Path(__file__).parent.parent / local_pdf
+            chunks = self._get_local_chunks(path)
+        elif resource.get("type") == "PDF":
+            url = resource.get("link")
+            if not url:
+                return None
+            chunks = self._get_chunks(url)
+        else:
             return None
-        url = resource.get("link")
-        if not url:
-            return None
-
-        chunks = self._get_chunks(url)
         if not chunks:
             return None
 

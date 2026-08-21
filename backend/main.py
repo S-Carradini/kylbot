@@ -283,7 +283,7 @@ async def chat_api_post(
     # takes a couple seconds, so we bound how many we fetch per question.
     matched_resources = resource_index.search(user_query, top_k=8)
     doc_excerpt_parts = []
-    for r in [m for m in matched_resources if m.get("type") == "PDF"][:2]:
+    for r in [m for m in matched_resources if m.get("type") == "PDF" or m.get("local_pdf")][:2]:
         excerpt = await asyncio.to_thread(pdf_index.get_excerpt, r, user_query)
         if excerpt:
             doc_excerpt_parts.append(f"- From \"{r['name']}\" ({r.get('link', '')}):\n  \"{excerpt}\"")

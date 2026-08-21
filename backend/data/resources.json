@@ -889,5 +889,15 @@
     "resource_description": "Part of the U.S. Bureau of Reclamation's Post-2026 Colorado River Operations Final EIS, covering: index",
     "topics": "Colorado River, post-2026, index",
     "tags": "Colorado River, post-2026, EIS, Bureau of Reclamation, index"
+  },
+  {
+    "name": "Large Water Users in Central Arizona",
+    "type": "Report",
+    "description": "Kyl Center report on large non-agricultural water users in Central Arizona, including power generation, semiconductor manufacturing, turf facilities, beverage production, and data centers",
+    "link": "https://issuu.com/asuwattscollege/docs/kyl_center_-_industrial_water_use_placeholder",
+    "local_pdf": "data/pdfs/large_water_users_central_arizona.pdf",
+    "resource_description": "Comprehensive look at large non-agricultural water uses in Central Arizona, covering water sourcing, sectoral consumption patterns, renewable versus unreplenished groundwater use, and how Assured Water Supply regulations shape planning for industries like semiconductor manufacturing and data centers",
+    "topics": "industrial water use, large water users, semiconductor manufacturing, data centers, power generation, turf facilities, beverage production, Assured Water Supply, Central Arizona",
+    "tags": "industrial water, large water users, semiconductors, data centers, power generation, turf, beverage, manufacturing, Assured Water Supply, AWS, Central Arizona"
   }
 ]
